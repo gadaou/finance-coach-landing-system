@@ -31,12 +31,12 @@ export function EnrollFormSection() {
   }
 
   return (
-    <section id="enroll" className="py-24 bg-muted/30">
+    <section id="enroll" className="pt-0 pb-24 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal animation="fade-in-up">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">
                 Start Your ACCA <span className="text-primary">Journey Today</span>
               </h2>
               <p className="text-lg text-muted-foreground text-balance">
@@ -68,8 +68,8 @@ export function EnrollFormSection() {
                 </div>
 
                 <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-                  <h3 className="text-xl font-bold mb-4">Quick Facts</h3>
-                  <div className="space-y-3 text-sm">
+                  <h3 className="text-xl font-bold mb-2.5">Quick Facts</h3>
+                  <div className="space-y-3 text-[0.95rem]">
                     <p className="text-muted-foreground">
                       <strong className="text-foreground">Duration:</strong> 2-3 years (depends on exemptions and pace)
                     </p>
@@ -107,7 +107,8 @@ export function EnrollFormSection() {
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
                         placeholder="Enter your full name"
-                        className="h-12"
+                        className="h-12 focus:ring-2 focus:ring-primary focus:border-primary cursor-text"
+                        autoComplete="name"
                       />
                     </div>
 
@@ -120,7 +121,8 @@ export function EnrollFormSection() {
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
                         placeholder="your.email@example.com"
-                        className="h-12"
+                        className="h-12 focus:ring-2 focus:ring-primary focus:border-primary cursor-text"
+                        autoComplete="email"
                       />
                     </div>
 
@@ -133,7 +135,8 @@ export function EnrollFormSection() {
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         placeholder="+20 XXX XXX XXXX"
-                        className="h-12"
+                        className="h-12 focus:ring-2 focus:ring-primary focus:border-primary cursor-text"
+                        autoComplete="tel"
                       />
                     </div>
 
@@ -143,14 +146,14 @@ export function EnrollFormSection() {
                         value={formData.learningMode}
                         onValueChange={(value) => handleChange("learningMode", value)}
                       >
-                        <div className="flex items-center space-x-2 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer">
-                          <RadioGroupItem value="online" id="online" />
+                        <div className="flex items-center space-x-2 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer focus-within:ring-2 focus-within:ring-primary">
+                          <RadioGroupItem value="online" id="online" className="cursor-pointer" />
                           <Label htmlFor="online" className="flex-1 cursor-pointer">
                             Online Classes
                           </Label>
                         </div>
-                        <div className="flex items-center space-x-2 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer">
-                          <RadioGroupItem value="on-campus" id="on-campus" />
+                        <div className="flex items-center space-x-2 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer focus-within:ring-2 focus-within:ring-primary">
+                          <RadioGroupItem value="on-campus" id="on-campus" className="cursor-pointer" />
                           <Label htmlFor="on-campus" className="flex-1 cursor-pointer">
                             On-Campus Classes
                           </Label>

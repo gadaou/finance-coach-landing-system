@@ -6,7 +6,21 @@ import { TrendingUp, DollarSign, Briefcase, Award } from "lucide-react"
 
 export function CareerGrowthSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+    <section className="pt-4 pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+      {/* Elegant separator line */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border/50"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <div className="bg-background px-6">
+              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary/60 to-transparent rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
@@ -105,7 +119,7 @@ function AnimatedSalaryChart() {
   const data = [
     { year: "Year 1", salary: 35, label: "Entry Level" },
     { year: "Year 2", salary: 45, label: "Associate" },
-    { year: "Year 3", salary: 65, label: "ACCA Qualified" },
+    { year: "Year 3", salary: 65, label: "ACCA-Qualified" },
     { year: "Year 4", salary: 85, label: "Senior Role" },
     { year: "Year 5", salary: 120, label: "Management" },
   ]
@@ -117,9 +131,9 @@ function AnimatedSalaryChart() {
         <p className="text-muted-foreground">ACCA qualified professionals (in thousands USD)</p>
       </div>
 
-      <div className="relative h-80">
+      <div className="relative h-80 pb-4">
         {/* Y-axis labels */}
-        <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-sm text-muted-foreground">
+        <div className="absolute left-0 top-0 bottom-4 flex flex-col justify-between text-sm text-muted-foreground">
           <span>$150K</span>
           <span>$100K</span>
           <span>$50K</span>
@@ -127,15 +141,16 @@ function AnimatedSalaryChart() {
         </div>
 
         {/* Chart area */}
-        <div className="ml-16 h-full flex items-end justify-between gap-4">
+        <div className="ml-16 h-[calc(100%-1rem)] flex items-end justify-between gap-4">
           {data.map((item, index) => (
             <div key={index} className="flex-1 flex flex-col items-center group cursor-pointer">
               {/* Bar */}
               <div className="relative w-full mb-4">
                 <div
-                  className="w-full bg-gradient-to-t from-primary to-primary/50 rounded-t-lg transition-all duration-1000 ease-out hover:from-primary hover:to-primary/70 relative overflow-hidden group-hover:shadow-2xl group-hover:shadow-primary/50"
+                  className="w-full bg-gradient-to-t from-primary to-primary/50 rounded-t-lg transition-all duration-1000 ease-out hover:from-primary hover:to-primary/70 relative overflow-visible group-hover:shadow-2xl group-hover:shadow-primary/50"
                   style={{
                     height: isVisible ? `${(item.salary / 150) * 300}px` : "0px",
+                    maxHeight: '300px',
                     transitionDelay: `${index * 150}ms`,
                   }}
                 >
@@ -143,7 +158,7 @@ function AnimatedSalaryChart() {
                   <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000" />
 
                   {/* Salary label */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-lg text-sm font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-lg text-sm font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-10">
                     ${item.salary}K
                   </div>
                 </div>
@@ -152,7 +167,7 @@ function AnimatedSalaryChart() {
               {/* X-axis labels */}
               <div className="text-center">
                 <div className="text-sm font-semibold mb-1">{item.year}</div>
-                <div className="text-xs text-muted-foreground">{item.label}</div>
+                <div className="text-xs text-muted-foreground whitespace-nowrap">{item.label}</div>
               </div>
             </div>
           ))}

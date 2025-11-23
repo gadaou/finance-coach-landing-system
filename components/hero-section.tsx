@@ -25,7 +25,9 @@ export function HeroSection() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-tight animate-fade-in-up">
             Become an <span className="text-primary">ACCA-Qualified</span>
             <br />
-            Professional with Finance Coach
+            Professional with
+            <br />
+            <span className="text-primary">Finance Coach</span>
           </h1>
 
           <p
@@ -42,10 +44,16 @@ export function HeroSection() {
             <Button
               size="lg"
               onClick={scrollToEnroll}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 shadow-2xl hover:shadow-3xl transition-all hover:scale-105 group"
+              variant="outline"
+              className="relative border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6 transition-all hover:scale-105 group bg-transparent overflow-hidden"
             >
-              Start Your ACCA Journey
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <span className="relative z-10 flex items-center">
+                Start Your ACCA Journey
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+              {/* Animated border glow effect */}
+              <div className="absolute inset-0 border-2 border-primary rounded-md animate-border-pulse opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
             </Button>
             <Button
               size="lg"
@@ -69,10 +77,27 @@ export function HeroSection() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="p-6 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                className="group relative p-6 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-primary/50 overflow-hidden"
+                style={{ animationDelay: `${0.3 + index * 0.1}s` }}
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                
+                {/* Animated number */}
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:scale-110 group-hover:text-primary transition-all duration-300 inline-block">
+                    {stat.number}
+                  </div>
+                  <div className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                    {stat.label}
+                  </div>
+                </div>
+                
+                {/* Pulsing dot indicator */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300" />
               </div>
             ))}
           </div>

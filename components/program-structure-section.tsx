@@ -27,7 +27,7 @@ export function ProgramStructureSection() {
   ]
 
   return (
-    <section id="program" className="py-24 bg-muted/30">
+    <section id="program" className="pt-0 pb-24 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -76,8 +76,33 @@ export function ProgramStructureSection() {
         </div>
 
         <ScrollReveal animation="fade-in-up">
-          <div className="mt-16 p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 group cursor-pointer">
-            <div className="max-w-3xl mx-auto text-center space-y-4">
+          <div className="mt-16 p-8 md:p-12 rounded-2xl border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 group cursor-pointer relative overflow-hidden">
+            {/* Base animated background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/8 to-primary/5 opacity-100" />
+            
+            {/* Animated moving gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[3000ms] ease-in-out" />
+            
+            {/* Animated shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
+            
+            {/* Animated pulsing glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 animate-pulse-glow transition-opacity duration-500" />
+            
+            {/* Animated dots pattern background */}
+            <div className="absolute inset-0 opacity-[0.08]">
+              <div 
+                className="absolute top-0 left-0 w-full h-full"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
+                  backgroundSize: '40px 40px',
+                  animation: 'float 4s ease-in-out infinite'
+                }}
+              />
+            </div>
+            
+            {/* Content */}
+            <div className="relative z-10 max-w-3xl mx-auto text-center space-y-4">
               <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
                 Complete Journey Support
               </h3>

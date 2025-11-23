@@ -76,7 +76,7 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
+  --font-sans: var(--font-parkinsans), "Parkinsans", system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -368,4 +368,35 @@ html {
 
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(111, 169, 66, 0.5);
+}
+
+/* Continuous smooth scrolling animation for testimonials */
+@keyframes scroll-smooth {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+.animate-scroll-smooth {
+  animation: scroll-smooth 25s linear infinite;
+  will-change: transform;
+}
+
+/* Animated border pulse for buttons */
+@keyframes border-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}
+
+.animate-border-pulse {
+  animation: border-pulse 2s ease-in-out infinite;
 }

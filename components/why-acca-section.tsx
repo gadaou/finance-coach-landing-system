@@ -36,7 +36,7 @@ export function WhyAccaSection() {
   ]
 
   return (
-    <section id="why-acca" className="py-24 bg-muted/30">
+    <section id="why-acca" className="pt-6 pb-24 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">

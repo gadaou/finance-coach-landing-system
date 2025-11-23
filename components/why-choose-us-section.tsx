@@ -36,7 +36,7 @@ export function WhyChooseUsSection() {
   ]
 
   return (
-    <section id="why-choose-us" className="py-24 bg-gradient-to-br from-background to-accent/20">
+    <section id="why-choose-us" className="pt-6 pb-24 bg-gradient-to-br from-background to-accent/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -44,25 +44,43 @@ export function WhyChooseUsSection() {
               Why Choose <span className="text-primary">Finance Coach?</span>
             </h2>
             <p className="text-lg text-muted-foreground text-balance">
-              Finance Coach is an officially ACCA-accredited learning partner in Egypt, delivering structured,
-              exam-focused preparation designed to help you pass from the first attempt.
+              Finance Coach is an officially ACCA-accredited learning partner in Egypt
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <ScrollReveal key={index} animation="slide-in-left" delay={index * 100}>
-              <div className="relative group cursor-pointer">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <div className="relative p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/50">
-                  <div className="mb-6 inline-flex p-4 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                    <feature.icon className="h-8 w-8" />
+              <div className="relative group cursor-pointer will-change-transform">
+                {/* Animated glow effect - optimized */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/10 to-primary/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
+                {/* Shimmer effect - optimized with transform */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out rounded-2xl pointer-events-none will-change-transform" />
+                
+                {/* Main card - optimized */}
+                <div className="relative p-6 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-3 hover:border-primary/50 hover:scale-[1.02] overflow-hidden will-change-transform">
+                  {/* Animated background gradient - simplified */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  {/* Icon container - optimized */}
+                  <div className="relative z-10 mb-4 inline-flex p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-[background-color,color,transform] duration-300 ease-out group-hover:scale-110 group-hover:rotate-6 will-change-transform">
+                    <feature.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-balance group-hover:text-primary transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground text-balance leading-relaxed">{feature.description}</p>
+                  
+                  {/* Content - optimized */}
+                  <div className="relative z-10">
+                    <h3 className="text-lg font-bold mb-2 text-balance group-hover:text-primary transition-[color,transform] duration-300 ease-out group-hover:translate-x-1 will-change-transform">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground text-balance leading-relaxed group-hover:text-foreground transition-color duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                  
+                  {/* Animated corner accent - simplified */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
               </div>
             </ScrollReveal>

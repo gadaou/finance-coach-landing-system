@@ -31,7 +31,7 @@ export function FaqSection() {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background to-accent/20">
+    <section className="pt-0 pb-24 bg-gradient-to-br from-background to-accent/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
