@@ -114,21 +114,27 @@ export function Footer() {
             {/* Social Media Icons */}
             <div className="flex gap-4 flex-shrink-0">
               <a
-                href="#"
+                href="https://www.facebook.com/share/1H2Kg4o6ZM/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-secondary-foreground/60 hover:text-primary transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/the.finance.coach?igsh=MWZ6bHBhYmF2bWNpbA=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-secondary-foreground/60 hover:text-primary transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/school/financecoach/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-secondary-foreground/60 hover:text-primary transition-colors"
                 aria-label="LinkedIn"
               >
@@ -143,7 +149,7 @@ export function Footer() {
                 href="https://gadaou.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-secondary-foreground hover:text-primary transition-all duration-300 hover:scale-110 inline-block hover:underline"
+                className="font-bold text-secondary-foreground hover:text-primary transition-colors duration-300"
               >
                 Developed By Gadaou.AI
               </a>

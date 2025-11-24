@@ -27,7 +27,7 @@ export function ProgramStructureSection() {
   ]
 
   return (
-    <section id="program" className="pt-0 pb-24 bg-muted/30">
+    <section id="program" className="pt-0 pb-6 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -76,7 +76,7 @@ export function ProgramStructureSection() {
         </div>
 
         <ScrollReveal animation="fade-in-up">
-          <div className="mt-16 p-8 md:p-12 rounded-2xl border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 group cursor-pointer relative overflow-hidden">
+          <div className="mt-8 p-8 md:p-12 rounded-2xl border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 group cursor-pointer relative overflow-hidden">
             {/* Base animated background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/8 to-primary/5 opacity-100" />
             

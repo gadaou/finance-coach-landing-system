@@ -31,7 +31,7 @@ export function EnrollFormSection() {
   }
 
   return (
-    <section id="enroll" className="pt-0 pb-24 bg-muted/30">
+    <section id="enroll" className="pt-0 pb-12 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal animation="fade-in-up">
