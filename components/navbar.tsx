@@ -78,7 +78,7 @@ export function Navbar() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-border">
+          <div className="md:hidden py-4 space-y-4 border-t border-border bg-white rounded-b-2xl">
             <button
               onClick={() => scrollToSection("why-acca")}
               className="block w-full text-left py-2 text-foreground/80 hover:text-primary transition-colors"

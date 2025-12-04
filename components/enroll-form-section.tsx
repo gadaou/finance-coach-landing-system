@@ -50,7 +50,7 @@ export function EnrollFormSection() {
               <div className="space-y-8">
                 <div className="p-8 rounded-2xl bg-card border border-border shadow-lg">
                   <h3 className="text-2xl font-bold mb-6">What You'll Get</h3>
-                  <ul className="space-y-4">
+                  <ul className="space-y-8">
                     {[
                       "Free consultation with ACCA experts",
                       "Detailed program roadmap",
@@ -65,21 +65,6 @@ export function EnrollFormSection() {
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-                  <h3 className="text-xl font-bold mb-2.5">Quick Facts</h3>
-                  <div className="space-y-3 text-[0.95rem]">
-                    <p className="text-muted-foreground">
-                      <strong className="text-foreground">Duration:</strong> 2-3 years (depends on exemptions and pace)
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong className="text-foreground">Format:</strong> Online and On-Campus options available
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong className="text-foreground">Support:</strong> Continuous guidance throughout your journey
-                    </p>
-                  </div>
                 </div>
               </div>
             </ScrollReveal>
@@ -168,10 +153,6 @@ export function EnrollFormSection() {
                     >
                       Book Your Free Consultation
                     </Button>
-
-                    <p className="text-xs text-muted-foreground text-center">
-                      By submitting this form, you agree to receive communications from Finance Coach Academy
-                    </p>
                   </form>
                 )}
               </div>

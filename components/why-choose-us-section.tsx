@@ -86,33 +86,6 @@ export function WhyChooseUsSection() {
             </ScrollReveal>
           ))}
         </div>
-
-        <ScrollReveal animation="fade-in-up">
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-8 p-8 rounded-2xl bg-primary/5 border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
-              <div className="text-center group cursor-pointer">
-                <div className="text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">
-                  98%
-                </div>
-                <div className="text-sm text-muted-foreground">Success Rate</div>
-              </div>
-              <div className="h-16 w-px bg-border" />
-              <div className="text-center group cursor-pointer">
-                <div className="text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">
-                  40+
-                </div>
-                <div className="text-sm text-muted-foreground">Expert Instructors</div>
-              </div>
-              <div className="h-16 w-px bg-border hidden sm:block" />
-              <div className="text-center hidden sm:block group cursor-pointer">
-                <div className="text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">
-                  10+
-                </div>
-                <div className="text-sm text-muted-foreground">Years of Excellence</div>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   )

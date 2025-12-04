@@ -19,11 +19,11 @@ export function Footer() {
     <footer className="bg-secondary text-secondary-foreground overflow-visible">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4">
         {/* Top Section - Three Columns */}
-        <div className="grid md:grid-cols-3 gap-8 mb-8 overflow-visible">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8 overflow-visible">
           {/* Left Column - Services */}
           <div className="overflow-visible">
-            <h3 className="font-bold text-lg mb-3 uppercase tracking-wider">Services</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Services</h3>
+            <ul className="space-y-1.5 md:space-y-2 text-sm">
               <li>
                 <a href="#why-acca" className="hover:text-primary transition-colors">
                   Why ACCA
@@ -49,8 +49,8 @@ export function Footer() {
 
           {/* Middle Column - Resources */}
           <div className="overflow-visible">
-            <h3 className="font-bold text-lg mb-3 uppercase tracking-wider">Resources</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Resources</h3>
+            <ul className="space-y-1.5 md:space-y-2 text-sm">
               <li>
                 <a href="#enroll" className="hover:text-primary transition-colors">
                   Contact Us
@@ -77,8 +77,8 @@ export function Footer() {
 
           {/* Right Column - Join Our Community */}
           <div className="overflow-visible">
-            <h3 className="font-bold text-lg mb-3 uppercase tracking-wider">Join Our Community</h3>
-            <p className="text-sm text-secondary-foreground/80 mb-3">
+            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Join Our Community</h3>
+            <p className="text-xs md:text-sm text-secondary-foreground/80 mb-2 md:mb-3">
               Subscribe for exclusive ACCA insights and special offers
             </p>
             <form onSubmit={handleSubscribe} className="space-y-2">
@@ -101,18 +101,18 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-secondary-foreground/20 pt-6 relative min-h-[100px]">
+        <div className="border-t border-secondary-foreground/20 pt-4 md:pt-6 relative min-h-[80px] md:min-h-[100px]">
           {/* Large faded brand name in center */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-secondary-foreground/5 select-none whitespace-nowrap">
+          <div className="absolute inset-0 flex items-start md:items-center justify-center pointer-events-none overflow-hidden pt-4 md:pt-0">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-secondary-foreground/5 select-none whitespace-nowrap">
               FINANCE COACH
             </h2>
           </div>
 
           {/* Bottom content */}
-          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6 pt-24 pb-0">
+          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-6 pt-12 md:pt-24 pb-0">
             {/* Social Media Icons */}
-            <div className="flex gap-4 flex-shrink-0">
+            <div className="flex gap-3 md:gap-4 flex-shrink-0">
               <a
                 href="https://www.facebook.com/share/1H2Kg4o6ZM/?mibextid=wwXIfr"
                 target="_blank"
@@ -143,17 +143,17 @@ export function Footer() {
             </div>
 
             {/* Copyright */}
-            <p className="text-sm text-secondary-foreground/60 text-center md:text-right flex-shrink-0">
-              © {new Date().getFullYear()} Finance Coach Academy.{" "}
+            <div className="text-xs sm:text-xs md:text-sm text-secondary-foreground/60 text-center md:text-right flex-shrink-0 max-w-full px-2 flex flex-col md:inline">
+              <span className="block md:inline">© {new Date().getFullYear()} Finance Coach Academy.</span>
               <a
                 href="https://gadaou.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-secondary-foreground hover:text-primary transition-colors duration-300"
+                className="font-bold text-secondary-foreground hover:text-primary transition-colors duration-300 block md:inline md:ml-1"
               >
                 Developed By Gadaou.AI
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>

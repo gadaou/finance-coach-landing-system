@@ -381,8 +381,14 @@ html {
 }
 
 .animate-scroll-smooth {
-  animation: scroll-smooth 25s linear infinite;
+  animation: scroll-smooth 15s linear infinite;
   will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .animate-scroll-smooth {
+    animation: scroll-smooth 7s linear infinite;
+  }
 }
 
 /* Animated border pulse for buttons */

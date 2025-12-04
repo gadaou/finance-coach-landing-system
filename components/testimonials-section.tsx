@@ -62,7 +62,7 @@ export function TestimonialsSection() {
     <section id="testimonials" className="pt-6 pb-24 bg-gradient-to-br from-background to-accent/20 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
               Success <span className="text-primary">Stories</span>
             </h2>
@@ -75,14 +75,14 @@ export function TestimonialsSection() {
 
         <div className="max-w-7xl mx-auto">
           <div className="relative overflow-hidden px-4">
-            <div className="flex animate-scroll-smooth gap-6 hover:[animation-play-state:paused]">
+            <div className="flex animate-scroll-smooth gap-4 hover:[animation-play-state:paused]">
               {duplicatedTestimonials.map((testimonial, index) => (
                 <div
                   key={index}
                   className="relative group flex-shrink-0 w-[380px] sm:w-[420px] lg:w-[460px]"
                 >
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                  <div className="relative p-6 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                  <div className="relative p-5 rounded-2xl bg-card border border-border shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                     <Quote className="h-8 w-8 text-primary/20 mb-3 flex-shrink-0" />
 
                     <div className="flex gap-1 mb-3 flex-shrink-0">
