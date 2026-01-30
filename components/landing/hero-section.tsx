@@ -14,7 +14,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-primary/5 to-background pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-primary/5 to-background pt-8">
       {/* Animated background pattern */}
       <div className="absolute inset-0 bg-[url('/abstract-professional-finance-pattern.jpg')] opacity-[0.03] bg-cover bg-center" />
       
@@ -26,7 +26,7 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto text-center space-y-8 py-20" dir="rtl">
+        <div className="max-w-6xl mx-auto text-center space-y-8 py-8" dir="rtl">
           <ScrollReveal animation="fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary animate-fade-in">
               <Award className="h-4 w-4" />

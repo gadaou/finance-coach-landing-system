@@ -67,10 +67,12 @@ export function InstructorSection() {
                   لأنك ستتعلم من{" "}
                   <span className="text-primary">الأفضل</span>
                 </h2>
+                <div className="text-lg md:text-xl">
+                  <span className="text-primary font-semibold">Double Certified</span> (CFA + CMA/FMVA)
+                </div>
 
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  مدربونا ليسوا فقط حاصلين على FMVA، بل هم{" "}
-                  <span className="text-primary font-semibold">Double Certified</span> (CFA + CMA/FMVA) ويعملون كمدراء ماليين في كبرى الشركات.
+                  مدربونا ليسوا فقط حاصلين على FMVA، بل هم Double Certified ويعملون كمدراء ماليين في كبرى الشركات.
                 </p>
 
                 <p className="text-base md:text-lg text-foreground font-medium">

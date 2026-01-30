@@ -4,40 +4,15 @@ import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const parkinsans = localFont({
+const notoSansArabic = localFont({
   src: [
     {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-Light.ttf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Parkinsans/static/Parkinsans-ExtraBold.ttf",
-      weight: "800",
+      path: "../public/font/Noto_Sans_Arabic/NotoSansArabic-VariableFont_wdth,wght.ttf",
+      weight: "100 900",
       style: "normal",
     },
   ],
-  variable: "--font-parkinsans",
+  variable: "--font-noto-sans-arabic",
   display: "swap",
 })
 
@@ -65,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${parkinsans.variable} font-sans antialiased`}>
+      <body className={`${notoSansArabic.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

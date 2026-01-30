@@ -27,7 +27,7 @@ export function EnrollSection() {
   }
 
   return (
-    <section id="enroll" className="py-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
+    <section id="enroll" className="pt-12 md:pt-24 pb-12 md:pb-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />

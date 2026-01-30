@@ -5,7 +5,7 @@ import { CheckCircle2, XCircle, GraduationCap, Briefcase, AlertTriangle } from "
 
 export function AudienceFilterSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+    <section className="pt-8 md:pt-24 pb-12 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />

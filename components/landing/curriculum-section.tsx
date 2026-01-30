@@ -2,12 +2,12 @@
 
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { MousePointerClick, Building2, TrendingUp, CheckCircle2, Calendar } from "lucide-react"
-import { SkillProgressionChart, TimelineProgressChart, SkillMasteryDashboard } from "./animated-charts"
+import { SkillProgressionChart, TimelineProgressChart } from "./animated-charts"
 import { useEffect, useState, useRef } from "react"
 
 export function CurriculumSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
+    <section className="pt-12 md:pt-24 pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -75,31 +75,13 @@ export function CurriculumSection() {
 
         {/* Charts Section */}
         <div className="max-w-6xl mx-auto mt-20 space-y-8">
-          {/* Skill Mastery Dashboard - New Luxury Component */}
-          <ScrollReveal animation="fade-in-up">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl">
-                <div className="text-center mb-6" dir="rtl">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                    لوحة <span className="text-primary">التحكم في المهارات</span>
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    تتبع تطورك في جميع المجالات الرئيسية
-                  </p>
-                </div>
-                <SkillMasteryDashboard />
-              </div>
-            </div>
-          </ScrollReveal>
-
           {/* Two Column Charts */}
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal animation="slide-in-right">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                <div className="relative p-6 rounded-2xl bg-card border border-border shadow-xl">
-                  <h3 className="text-xl font-bold mb-4 text-center" dir="rtl">
+                <div className="relative p-3 sm:p-6 rounded-2xl bg-card border border-border shadow-xl">
+                  <h3 className="text-xl font-extrabold mb-2 sm:mb-4 text-center" dir="rtl">
                     تطور المهارات
                   </h3>
                   <SkillProgressionChart />

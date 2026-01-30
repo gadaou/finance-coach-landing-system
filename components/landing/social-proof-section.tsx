@@ -4,6 +4,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { Quote, Building2, Users } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import { SkillsBreakdownChart } from "./animated-charts"
 
 export function SocialProofSection() {
   const companies = [
@@ -14,7 +15,7 @@ export function SocialProofSection() {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+    <section className="pt-0 md:pt-24 pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -22,6 +23,21 @@ export function SocialProofSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Skills Breakdown Chart */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="max-w-4xl mx-auto mb-20">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+              <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl">
+                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-center" dir="rtl">
+                  Skills Breakdown
+                </h3>
+                <SkillsBreakdownChart />
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
         {/* Company Logos Section */}
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">

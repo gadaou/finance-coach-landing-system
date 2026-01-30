@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Zap, TrendingUp, Gem, Target, MousePointerClick, Building2, Briefcase } from "lucide-react"
 
 // Skill Progression Chart
 export function SkillProgressionChart() {
   const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [animatedData, setAnimatedData] = useState([
     { skill: "Excel", value: 0 },
     { skill: "Modeling", value: 0 },
@@ -22,11 +23,20 @@ export function SkillProgressionChart() {
   ]
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
           setIsVisible(true)
-          // Animate values
+          // Animate values with smoother timing
           data.forEach((item, index) => {
             setTimeout(() => {
               setAnimatedData((prev) => {
@@ -34,7 +44,7 @@ export function SkillProgressionChart() {
                 newData[index] = { ...newData[index], value: item.value }
                 return newData
               })
-            }, index * 300)
+            }, index * 200)
           })
         }
       },
@@ -51,23 +61,41 @@ export function SkillProgressionChart() {
   const chartConfig = {
     value: {
       label: "المهارة",
-      color: "hsl(var(--chart-1))",
+      color: "hsl(140, 60%, 58%)",
     },
   }
 
   return (
-    <div ref={chartRef} className="w-full h-64 md:h-80">
+    <div ref={chartRef} className="w-full h-48 sm:h-64 md:h-80">
       <ChartContainer config={chartConfig}>
-        <BarChart data={animatedData} layout="vertical" margin={{ left: 20, right: 20, top: 20, bottom: 20 }}>
+        <BarChart 
+          data={animatedData} 
+          layout="vertical" 
+          margin={{ 
+            left: isMobile ? 10 : 20, 
+            right: isMobile ? 10 : 20, 
+            top: isMobile ? 10 : 20, 
+            bottom: isMobile ? 10 : 20 
+          }}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
           <XAxis type="number" domain={[0, 100]} stroke="hsl(var(--muted-foreground))" />
           <YAxis dataKey="skill" type="category" stroke="hsl(var(--muted-foreground))" />
           <ChartTooltip content={<ChartTooltipContent />} />
+          <defs>
+            <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(140, 60%, 53%)" />
+              <stop offset="50%" stopColor="hsl(140, 60%, 58%)" />
+              <stop offset="100%" stopColor="hsl(140, 60%, 63%)" />
+            </linearGradient>
+          </defs>
           <Bar
             dataKey="value"
-            fill="hsl(var(--chart-1))"
+            fill="url(#greenGradient)"
             radius={[0, 8, 8, 0]}
-            animationDuration={1000}
+            animationDuration={1500}
+            animationBegin={0}
+            isAnimationActive={true}
           />
         </BarChart>
       </ChartContainer>
@@ -362,6 +390,227 @@ export function SkillMasteryDashboard() {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// Skills Breakdown Pie Chart - Luxury Animated
+export function SkillsBreakdownChart() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [animatedData, setAnimatedData] = useState([
+    { name: "Financial Modeling", value: 0 },
+    { name: "Finance", value: 0 },
+    { name: "Excel", value: 0 },
+    { name: "Valuation", value: 0 },
+    { name: "Budgeting & Forecasting", value: 0 },
+    { name: "Presentation & Visuals", value: 0 },
+    { name: "Accounting", value: 0 },
+    { name: "Strategy", value: 0 },
+  ])
+  const chartRef = useRef<HTMLDivElement>(null)
+
+  const data = [
+    { name: "Financial Modeling", value: 25 },
+    { name: "Finance", value: 23 },
+    { name: "Excel", value: 17 },
+    { name: "Valuation", value: 10 },
+    { name: "Budgeting & Forecasting", value: 8 },
+    { name: "Presentation & Visuals", value: 8 },
+    { name: "Accounting", value: 5 },
+    { name: "Strategy", value: 4 },
+  ]
+
+  // Brand green colors - gradient from dark to light
+  const COLORS = [
+    "hsl(140, 60%, 45%)",  // Dark green - Financial Modeling
+    "hsl(140, 60%, 48%)",  // Finance
+    "hsl(140, 60%, 52%)",  // Excel
+    "hsl(140, 60%, 55%)",  // Valuation
+    "hsl(140, 60%, 58%)",  // Budgeting
+    "hsl(140, 60%, 61%)",  // Presentation
+    "hsl(140, 60%, 64%)",  // Accounting
+    "hsl(140, 60%, 67%)",  // Light green - Strategy
+  ]
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+          // Animate values sequentially
+          data.forEach((item, index) => {
+            setTimeout(() => {
+              setAnimatedData((prev) => {
+                const newData = [...prev]
+                newData[index] = { ...newData[index], value: item.value }
+                return newData
+              })
+            }, index * 150)
+          })
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  const renderCustomLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    name,
+    value,
+  }: any) => {
+    const RADIAN = Math.PI / 180
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
+    
+    // Determine if mobile based on radius size (mobile uses smaller radius)
+    const isMobileSize = outerRadius <= 90
+    const labelRadius = outerRadius + (isMobileSize ? 20 : 30)
+    const labelX = cx + labelRadius * Math.cos(-midAngle * RADIAN)
+    const labelY = cy + labelRadius * Math.sin(-midAngle * RADIAN)
+
+    return (
+      <g>
+        {/* Dashed line from pie to label - hide on mobile */}
+        {!isMobileSize && (
+          <line
+            x1={x}
+            y1={y}
+            x2={labelX}
+            y2={labelY}
+            stroke="hsl(var(--muted-foreground))"
+            strokeWidth={1}
+            strokeDasharray="3 3"
+            opacity={0.4}
+          />
+        )}
+        {/* Percentage inside pie */}
+        <text
+          x={x}
+          y={y}
+          fill="white"
+          textAnchor="middle"
+          dominantBaseline="central"
+          fontSize={isMobileSize ? 10 : 12}
+          fontWeight="bold"
+        >
+          {`${value}%`}
+        </text>
+        {/* Label outside pie - hide on mobile */}
+        {!isMobileSize && (
+          <text
+            x={labelX}
+            y={labelY}
+            fill="hsl(var(--foreground))"
+            textAnchor={labelX > cx ? "start" : "end"}
+            dominantBaseline="central"
+            fontSize={12}
+            fontWeight="medium"
+          >
+            {name}
+          </text>
+        )}
+      </g>
+    )
+  }
+
+  const renderCustomLegend = (props: any) => {
+    const { payload } = props
+    return (
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 px-2">
+        {payload.map((entry: any, index: number) => (
+          <div key={index} className="flex items-center gap-1.5 sm:gap-2">
+            <div
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full flex-shrink-0"
+              style={{ backgroundColor: entry.color }}
+            />
+            <span className="text-xs sm:text-sm text-muted-foreground">{entry.value}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  return (
+    <div ref={chartRef} className="w-full h-80 sm:h-96 md:h-[500px] relative">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={animatedData}
+            cx="50%"
+            cy="50%"
+            labelLine={!isMobile}
+            label={renderCustomLabel}
+            outerRadius={isMobile ? 80 : 120}
+            innerRadius={isMobile ? 40 : 60}
+            fill="#8884d8"
+            dataKey="value"
+            animationBegin={0}
+            animationDuration={1500}
+            isAnimationActive={isVisible}
+          >
+            {animatedData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+                style={{
+                  filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
+                  transition: "all 0.3s ease-out",
+                }}
+              />
+            ))}
+          </Pie>
+          <ChartTooltip
+            content={({ active, payload }) => {
+              if (active && payload && payload.length) {
+                return (
+                  <div className="rounded-lg border bg-background p-2 shadow-sm">
+                    <div className="grid gap-2">
+                      <div className="flex items-center gap-2">
+                        <div
+                          className="h-3 w-3 rounded-full"
+                          style={{ backgroundColor: payload[0].payload.fill }}
+                        />
+                        <span className="font-medium">{payload[0].name}</span>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {payload[0].value}%
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+              return null
+            }}
+          />
+          <Legend
+            content={renderCustomLegend}
+            wrapperStyle={{ paddingTop: "20px" }}
+          />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   )
 }

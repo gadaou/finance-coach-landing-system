@@ -76,7 +76,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-parkinsans), "Parkinsans", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-noto-sans-arabic), "Noto Sans Arabic", system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
