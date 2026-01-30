@@ -2,12 +2,30 @@
 
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { Play, Award, CheckCircle2, TrendingUp, Loader2 } from "lucide-react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export function InstructorSection() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [videoError, setVideoError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Check if video file is accessible
+  useEffect(() => {
+    const checkVideo = async () => {
+      try {
+        const response = await fetch("/rel.mp4", { method: "HEAD" })
+        if (!response.ok) {
+          console.error("Video file not found at /rel.mp4")
+          setVideoError(true)
+        }
+      } catch (error) {
+        console.error("Error checking video file:", error)
+        setVideoError(true)
+      }
+    }
+    checkVideo()
+  }, [])
 
   return (
     <section className="py-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
@@ -27,11 +45,10 @@ export function InstructorSection() {
                   {/* Video element */}
                   <video
                     ref={videoRef}
-                    src="/rel.mp4"
                     className="w-full h-full object-contain"
                     controls={isPlaying}
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     muted={false}
                     onLoadStart={() => setIsLoading(true)}
                     onCanPlay={() => setIsLoading(false)}
@@ -39,11 +56,31 @@ export function InstructorSection() {
                     onPlaying={() => setIsLoading(false)}
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
-                    onError={() => {
+                    onError={(e) => {
                       setIsLoading(false)
-                      console.error("Video failed to load")
+                      setVideoError(true)
+                      const video = e.currentTarget
+                      console.error("Video failed to load", {
+                        error: video.error,
+                        code: video.error?.code,
+                        message: video.error?.message,
+                        networkState: video.networkState,
+                      })
                     }}
-                  />
+                  >
+                    <source src="/rel.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  {/* Error message if video fails to load */}
+                  {videoError && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/70 z-30">
+                      <div className="text-center p-6">
+                        <p className="text-white mb-2">تعذر تحميل الفيديو</p>
+                        <p className="text-white/80 text-sm">Video could not be loaded</p>
+                      </div>
+                    </div>
+                  )}
                   
                   {/* Loading overlay */}
                   {isLoading && isPlaying && (
