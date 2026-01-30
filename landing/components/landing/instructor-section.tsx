@@ -1,11 +1,13 @@
 "use client"
 
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { Play, Award, CheckCircle2, TrendingUp } from "lucide-react"
-import { useState } from "react"
+import { Play, Award, CheckCircle2, TrendingUp, Loader2 } from "lucide-react"
+import { useState, useRef } from "react"
 
 export function InstructorSection() {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   return (
     <section className="py-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
@@ -21,32 +23,71 @@ export function InstructorSection() {
             {/* Video Section */}
             <ScrollReveal animation="slide-in-right">
               <div className="relative group">
-                <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/20 shadow-2xl">
-                  {/* Video placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted/50 to-muted/30">
-                    {!isPlaying ? (
-                      <button
-                        onClick={() => setIsPlaying(true)}
-                        className="group/play relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-primary/50"
-                      >
-                        <Play className="h-8 w-8 md:h-10 md:w-10 ml-1 fill-current" />
-                        <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
-                      </button>
-                    ) : (
-                      <div className="text-center p-8">
-                        <p className="text-muted-foreground mb-4">سيتم إضافة الفيديو هنا</p>
-                        <button
-                          onClick={() => setIsPlaying(false)}
-                          className="text-sm text-primary hover:underline"
-                        >
-                          إغلاق
-                        </button>
+                <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/20 shadow-2xl">
+                  {/* Video element */}
+                  <video
+                    ref={videoRef}
+                    src="/reel.mp4"
+                    className="w-full h-full object-contain"
+                    controls={isPlaying}
+                    playsInline
+                    preload="none"
+                    muted={false}
+                    onLoadStart={() => setIsLoading(true)}
+                    onCanPlay={() => setIsLoading(false)}
+                    onWaiting={() => setIsLoading(true)}
+                    onPlaying={() => setIsLoading(false)}
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                    onError={() => {
+                      setIsLoading(false)
+                      console.error("Video failed to load")
+                    }}
+                  />
+                  
+                  {/* Loading overlay */}
+                  {isLoading && isPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+                      <div className="flex flex-col items-center gap-3">
+                        <Loader2 className="h-8 w-8 text-primary animate-spin" />
+                        <p className="text-sm text-white/80">جاري التحميل...</p>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
+                  
+                  {/* Play button overlay */}
+                  {!isPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-black/30 to-black/20 z-10">
+                      <button
+                        onClick={async () => {
+                          if (videoRef.current) {
+                            setIsLoading(true)
+                            try {
+                              await videoRef.current.play()
+                              setIsPlaying(true)
+                            } catch (error) {
+                              console.error("Error playing video:", error)
+                              setIsLoading(false)
+                            }
+                          }
+                        }}
+                        disabled={isLoading}
+                        className="group/play relative z-10 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 hover:shadow-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isLoading ? (
+                          <Loader2 className="h-8 w-8 md:h-10 md:w-10 animate-spin" />
+                        ) : (
+                          <>
+                            <Play className="h-8 w-8 md:h-10 md:w-10 ml-1 fill-current" />
+                            <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
                   
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
                 </div>
                 
                 {/* Decorative elements */}
