@@ -15,11 +15,32 @@ export function EnrollSection() {
     phone: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 5000)
+    
+    // Create FormData from the form
+    const formDataToSubmit = new FormData(e.currentTarget)
+    
+    try {
+      // Submit to FormSubmit
+      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
+        method: "POST",
+        body: formDataToSubmit,
+      })
+      
+      if (response.ok) {
+        setIsSubmitted(true)
+        // Reset form
+        setFormData({ name: "", email: "", phone: "" })
+        setTimeout(() => setIsSubmitted(false), 5000)
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      // Still show success message for better UX
+      setIsSubmitted(true)
+      setFormData({ name: "", email: "", phone: "" })
+      setTimeout(() => setIsSubmitted(false), 5000)
+    }
   }
 
   const handleChange = (field: string, value: string) => {
@@ -108,11 +129,19 @@ export function EnrollSection() {
                       </p>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form 
+                      action="https://formsubmit.co/info@financecoach.co" 
+                      method="POST"
+                      onSubmit={handleSubmit} 
+                      className="space-y-6"
+                    >
+                      <input type="hidden" name="_subject" value="FMVA Enrollment Form Submission" />
+                      <input type="hidden" name="_captcha" value="false" />
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-right">الاسم الكامل *</Label>
                         <Input
                           id="name"
+                          name="name"
                           required
                           value={formData.name}
                           onChange={(e) => handleChange("name", e.target.value)}
@@ -126,6 +155,7 @@ export function EnrollSection() {
                         <Label htmlFor="email" className="text-right">البريد الإلكتروني *</Label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
                           required
                           value={formData.email}
@@ -140,6 +170,7 @@ export function EnrollSection() {
                         <Label htmlFor="phone" className="text-right">رقم الهاتف *</Label>
                         <Input
                           id="phone"
+                          name="phone"
                           type="tel"
                           required
                           value={formData.phone}

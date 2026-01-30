@@ -9,10 +9,28 @@ import { useState } from "react"
 export function Footer() {
   const [email, setEmail] = useState("")
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Subscribed:", email)
-    setEmail("")
+    
+    // Create FormData from the form
+    const formDataToSubmit = new FormData(e.currentTarget)
+    
+    try {
+      // Submit to FormSubmit
+      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
+        method: "POST",
+        body: formDataToSubmit,
+      })
+      
+      if (response.ok) {
+        setEmail("")
+        // You can add a success message here if needed
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      // Clear email even on error for better UX
+      setEmail("")
+    }
   }
 
   return (
@@ -81,9 +99,17 @@ export function Footer() {
             <p className="text-xs md:text-sm text-secondary-foreground/80 mb-2 md:mb-3">
               Subscribe for exclusive ACCA insights and special offers
             </p>
-            <form onSubmit={handleSubscribe} className="space-y-2">
+            <form 
+              action="https://formsubmit.co/info@financecoach.co" 
+              method="POST"
+              onSubmit={handleSubscribe} 
+              className="space-y-2"
+            >
+              <input type="hidden" name="_subject" value="Newsletter Subscription" />
+              <input type="hidden" name="_captcha" value="false" />
               <Input
                 type="email"
+                name="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

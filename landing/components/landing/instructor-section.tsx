@@ -27,7 +27,7 @@ export function InstructorSection() {
                   {/* Video element */}
                   <video
                     ref={videoRef}
-                    src="/reel.mp4"
+                    src="/rel.mp4"
                     className="w-full h-full object-contain"
                     controls={isPlaying}
                     playsInline

@@ -9,10 +9,28 @@ import { useState } from "react"
 export function Footer() {
   const [email, setEmail] = useState("")
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Subscribed:", email)
-    setEmail("")
+    
+    // Create FormData from the form
+    const formDataToSubmit = new FormData(e.currentTarget)
+    
+    try {
+      // Submit to FormSubmit
+      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
+        method: "POST",
+        body: formDataToSubmit,
+      })
+      
+      if (response.ok) {
+        setEmail("")
+        // You can add a success message here if needed
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      // Clear email even on error for better UX
+      setEmail("")
+    }
   }
 
   return (
@@ -64,9 +82,17 @@ export function Footer() {
             <p className="text-xs text-secondary-foreground/80 mb-2">
               Subscribe for exclusive insights and special offers
             </p>
-            <form onSubmit={handleSubscribe} className="space-y-2">
+            <form 
+              action="https://formsubmit.co/info@financecoach.co" 
+              method="POST"
+              onSubmit={handleSubscribe} 
+              className="space-y-2"
+            >
+              <input type="hidden" name="_subject" value="Newsletter Subscription" />
+              <input type="hidden" name="_captcha" value="false" />
               <Input
                 type="email"
+                name="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -129,16 +155,6 @@ export function Footer() {
             <div className="text-xs text-secondary-foreground/60 text-center md:text-right flex-shrink-0 w-full md:w-auto px-2">
               <div className="flex flex-col md:inline-block">
                 <span className="block md:inline">© {new Date().getFullYear()} Finance Coach Academy.</span>
-                <span className="block md:inline md:ml-1">
-                  <a
-                    href="https://gadaou.ai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold text-secondary-foreground hover:text-primary transition-colors duration-300"
-                  >
-                    Developed By Gadaou.AI
-                  </a>
-                </span>
               </div>
             </div>
           </div>
