@@ -8,14 +8,14 @@ import { SkillsBreakdownChart } from "./animated-charts"
 
 export function SocialProofSection() {
   const companies = [
-    { name: "CIB", logo: "/logos/cib.png" },
-    { name: "HSBC", logo: "/logos/hsbc.png" },
-    { name: "Deloitte", logo: "/logos/deloitte.png" },
-    { name: "KPMG", logo: "/logos/kpmg.png" },
+    { name: "CIB", logo: "/banks/CIB.png" },
+    { name: "HSBC", logo: "/banks/hsbc.png" },
+    { name: "Deloitte", logo: "/banks/Deloitte.png" },
+    { name: "KPMG", logo: "/banks/KPMG.png" },
   ]
 
   return (
-    <section className="pt-0 md:pt-24 pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+    <section className="pt-0 md:pt-24 pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -25,10 +25,10 @@ export function SocialProofSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Skills Breakdown Chart */}
         <ScrollReveal animation="fade-in-up">
-          <div className="max-w-4xl mx-auto mb-20">
-            <div className="relative group">
+          <div className="max-w-4xl mx-auto mb-20 mt-2 md:-mt-24">
+            <div className="relative group overflow-visible">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl">
+              <div className="relative p-4 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl overflow-visible">
                 <h3 className="text-2xl md:text-3xl font-bold mb-2 text-center" dir="rtl">
                   Skills Breakdown
                 </h3>
@@ -124,6 +124,11 @@ function CompanyLogo({
   index: number
 }) {
   const [imageError, setImageError] = useState(false)
+  
+  // Increase size for HSBC and Deloitte
+  const isLargeLogo = company.name === "HSBC" || company.name === "Deloitte"
+  const imageWidth = isLargeLogo ? 240 : 140
+  const imageHeight = isLargeLogo ? 120 : 70
 
   return (
     <ScrollReveal animation="scale-in" delay={index * 100}>
@@ -139,9 +144,9 @@ function CompanyLogo({
             <Image
               src={company.logo}
               alt={company.name}
-              width={120}
-              height={60}
-              className="object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+              width={imageWidth}
+              height={imageHeight}
+              className="object-contain opacity-100"
               onError={() => setImageError(true)}
             />
           )}

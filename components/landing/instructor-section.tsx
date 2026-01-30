@@ -8,7 +8,7 @@ export function InstructorSection() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
+    <section className="pt-24 pb-12 md:pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -57,7 +57,7 @@ export function InstructorSection() {
 
             {/* Content Section */}
             <ScrollReveal animation="slide-in-left">
-              <div className="space-y-6" dir="rtl">
+              <div className="space-y-6 -mt-8" dir="rtl">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary w-fit">
                   <Award className="h-4 w-4" />
                   لماذا تتعلم معنا؟

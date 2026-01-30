@@ -554,17 +554,17 @@ export function SkillsBreakdownChart() {
   }, [])
 
   return (
-    <div ref={chartRef} className="w-full h-80 sm:h-96 md:h-[500px] relative">
+    <div ref={chartRef} className="w-full h-[480px] sm:h-96 md:h-[500px] relative overflow-visible px-2 -my-16 sm:my-0">
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
+        <PieChart margin={{ top: 30, right: 30, bottom: isMobile ? 50 : 80, left: 30 }}>
           <Pie
             data={animatedData}
             cx="50%"
-            cy="50%"
+            cy={isMobile ? "52%" : "50%"}
             labelLine={!isMobile}
             label={renderCustomLabel}
-            outerRadius={isMobile ? 80 : 120}
-            innerRadius={isMobile ? 40 : 60}
+            outerRadius={isMobile ? 75 : 120}
+            innerRadius={isMobile ? 38 : 60}
             fill="#8884d8"
             dataKey="value"
             animationBegin={0}
@@ -607,7 +607,7 @@ export function SkillsBreakdownChart() {
           />
           <Legend
             content={renderCustomLegend}
-            wrapperStyle={{ paddingTop: "20px" }}
+            wrapperStyle={{ paddingTop: isMobile ? "10px" : "20px" }}
           />
         </PieChart>
       </ResponsiveContainer>

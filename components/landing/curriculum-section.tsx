@@ -16,7 +16,7 @@ export function CurriculumSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-16 -mt-8" dir="rtl">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               المنهج <span className="text-primary">"الجاهز للمكتب"</span>
             </h2>
@@ -90,7 +90,7 @@ export function CurriculumSection() {
             </ScrollReveal>
 
             <ScrollReveal animation="slide-in-left">
-              <div className="relative group">
+              <div className="relative group -mb-12 md:mb-0">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative p-6 rounded-2xl bg-card border border-border shadow-xl">
                   <h3 className="text-xl font-bold mb-4 text-center" dir="rtl">
