@@ -39,12 +39,36 @@ export function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
+            <button
+              onClick={() => scrollToSection("why-acca")}
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Why ACCA
+            </button>
+            <button
+              onClick={() => scrollToSection("why-choose-us")}
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Why Choose Us
+            </button>
+            <button
+              onClick={() => scrollToSection("program")}
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Program
+            </button>
+            <button
+              onClick={() => scrollToSection("testimonials")}
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              Success Stories
+            </button>
             <Button
               onClick={() => scrollToSection("enroll")}
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all"
             >
-              سجل الآن
+              Start Your Journey
             </Button>
           </div>
 
@@ -55,8 +79,32 @@ export function Navbar() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 space-y-4 border-t border-border bg-white rounded-b-2xl">
+            <button
+              onClick={() => scrollToSection("why-acca")}
+              className="block w-full text-left py-2 text-foreground/80 hover:text-primary transition-colors"
+            >
+              Why ACCA
+            </button>
+            <button
+              onClick={() => scrollToSection("why-choose-us")}
+              className="block w-full text-left py-2 text-foreground/80 hover:text-primary transition-colors"
+            >
+              Why Choose Us
+            </button>
+            <button
+              onClick={() => scrollToSection("program")}
+              className="block w-full text-left py-2 text-foreground/80 hover:text-primary transition-colors"
+            >
+              Program
+            </button>
+            <button
+              onClick={() => scrollToSection("testimonials")}
+              className="block w-full text-left py-2 text-foreground/80 hover:text-primary transition-colors"
+            >
+              Success Stories
+            </button>
             <Button onClick={() => scrollToSection("enroll")} className="w-full bg-primary hover:bg-primary/90">
-              سجل الآن
+              Start Your Journey
             </Button>
           </div>
         )}

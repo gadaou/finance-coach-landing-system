@@ -1,0 +1,137 @@
+"use client"
+
+import { ScrollReveal } from "@/components/scroll-reveal"
+import { Quote, Building2, Users } from "lucide-react"
+import Image from "next/image"
+import { useState } from "react"
+
+export function SocialProofSection() {
+  const companies = [
+    { name: "CIB", logo: "/logos/cib.png" },
+    { name: "HSBC", logo: "/logos/hsbc.png" },
+    { name: "Deloitte", logo: "/logos/deloitte.png" },
+    { name: "KPMG", logo: "/logos/kpmg.png" },
+  ]
+
+  return (
+    <section className="py-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Company Logos Section */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
+              <Building2 className="h-4 w-4" />
+              خريجونا يعملون هنا
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+              شركات <span className="text-primary">عالمية</span> تثق بنا
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              انضم إلى مئات الخريجين الذين يعملون في أكبر الشركات المالية
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Company Logos Grid */}
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {companies.map((company, index) => (
+              <CompanyLogo key={index} company={company} index={index} />
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonial Section */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+              <div className="relative p-8 md:p-12 rounded-2xl bg-card border-2 border-primary/20 shadow-xl" dir="rtl">
+                <Quote className="h-12 w-12 text-primary/20 mb-6" />
+                <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-6 text-foreground">
+                  "كنت خايف من الانترفيو التقني، لكن بعد الكورس جاوبت على كل الأسئلة بثقة واشتغلت في CIB."
+                </blockquote>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Users className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-lg">خريج FMVA</div>
+                    <div className="text-sm text-muted-foreground">موظف في CIB - Investment Banking</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* CTA Section */}
+        <ScrollReveal animation="fade-in-up">
+          <div className="mt-16 text-center">
+            <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20" dir="rtl">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                هل أنت جاهز لبدء رحلتك؟
+              </h3>
+              <p className="text-lg text-muted-foreground mb-6">
+                انضم إلى مئات الخريجين الذين غيروا مسارهم المهني
+              </p>
+              <button
+                onClick={() => {
+                  const element = document.getElementById("enroll")
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" })
+                  }
+                }}
+                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                سجل الآن - ضمان 14 يوم
+              </button>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  )
+}
+
+function CompanyLogo({
+  company,
+  index,
+}: {
+  company: { name: string; logo: string }
+  index: number
+}) {
+  const [imageError, setImageError] = useState(false)
+
+  return (
+    <ScrollReveal animation="scale-in" delay={index * 100}>
+      <div className="group relative">
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl flex items-center justify-center h-32">
+          {imageError ? (
+            <div className="text-center">
+              <Building2 className="h-12 w-12 text-primary/30 mx-auto mb-2" />
+              <div className="text-sm font-semibold text-muted-foreground">{company.name}</div>
+            </div>
+          ) : (
+            <Image
+              src={company.logo}
+              alt={company.name}
+              width={120}
+              height={60}
+              className="object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+              onError={() => setImageError(true)}
+            />
+          )}
+        </div>
+      </div>
+    </ScrollReveal>
+  )
+}
+

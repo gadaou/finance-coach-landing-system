@@ -7,7 +7,7 @@ import { CurriculumSection } from "@/components/landing/curriculum-section"
 import { SocialProofSection } from "@/components/landing/social-proof-section"
 import { EnrollSection } from "@/components/landing/enroll-section"
 
-export default function Page() {
+export default function LandingPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -21,3 +21,4 @@ export default function Page() {
     </main>
   )
 }
+
