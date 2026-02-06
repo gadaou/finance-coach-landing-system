@@ -15,7 +15,7 @@ export function SocialProofSection() {
   ]
 
   return (
-    <section className="pt-0 md:pt-24 pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
+    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -25,7 +25,7 @@ export function SocialProofSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Skills Breakdown Chart */}
         <ScrollReveal animation="fade-in-up">
-          <div className="max-w-4xl mx-auto mb-20 mt-2 md:-mt-24">
+          <div className="max-w-4xl mx-auto mb-8 md:mb-20 mt-2 md:-mt-24">
             <div className="relative group overflow-visible">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
               <div className="relative p-4 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl overflow-visible">
@@ -40,7 +40,7 @@ export function SocialProofSection() {
 
         {/* Company Logos Section */}
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16" dir="rtl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
               <Building2 className="h-4 w-4" />
               خريجونا يعملون هنا
@@ -54,11 +54,30 @@ export function SocialProofSection() {
           </div>
         </ScrollReveal>
 
-        {/* Company Logos Grid */}
-        <div className="max-w-5xl mx-auto mb-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Company Logos - Mobile Autoscroll / Desktop Grid */}
+        <div className="max-w-5xl mx-auto mb-8 md:mb-20">
+          {/* Mobile: Horizontal Autoscrolling */}
+          <div className="md:hidden overflow-hidden">
+            <div className="flex animate-scroll gap-6">
+              {/* First set of logos */}
+              {companies.map((company, index) => (
+                <div key={`mobile-1-${index}`} className="flex-shrink-0 w-40">
+                  <CompanyLogo company={company} index={index} isMobile={true} />
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {companies.map((company, index) => (
+                <div key={`mobile-2-${index}`} className="flex-shrink-0 w-40">
+                  <CompanyLogo company={company} index={index} isMobile={true} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Grid Layout */}
+          <div className="hidden md:grid md:grid-cols-4 gap-8">
             {companies.map((company, index) => (
-              <CompanyLogo key={index} company={company} index={index} />
+              <CompanyLogo key={`desktop-${index}`} company={company} index={index} isMobile={false} />
             ))}
           </div>
         </div>
@@ -119,9 +138,11 @@ export function SocialProofSection() {
 function CompanyLogo({
   company,
   index,
+  isMobile,
 }: {
   company: { name: string; logo: string }
   index: number
+  isMobile: boolean
 }) {
   const [imageError, setImageError] = useState(false)
   
@@ -130,28 +151,36 @@ function CompanyLogo({
   const imageWidth = isLargeLogo ? 240 : 140
   const imageHeight = isLargeLogo ? 120 : 70
 
+  const logoContent = (
+    <div className="group relative">
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative p-4 md:p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl flex items-center justify-center h-28 md:h-32">
+        {imageError ? (
+          <div className="text-center">
+            <Building2 className="h-12 w-12 text-primary/30 mx-auto mb-2" />
+            <div className="text-sm font-semibold text-muted-foreground">{company.name}</div>
+          </div>
+        ) : (
+          <Image
+            src={company.logo}
+            alt={company.name}
+            width={imageWidth}
+            height={imageHeight}
+            className="object-contain opacity-100"
+            onError={() => setImageError(true)}
+          />
+        )}
+      </div>
+    </div>
+  )
+
+  if (isMobile) {
+    return logoContent
+  }
+
   return (
     <ScrollReveal animation="scale-in" delay={index * 100}>
-      <div className="group relative">
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl flex items-center justify-center h-32">
-          {imageError ? (
-            <div className="text-center">
-              <Building2 className="h-12 w-12 text-primary/30 mx-auto mb-2" />
-              <div className="text-sm font-semibold text-muted-foreground">{company.name}</div>
-            </div>
-          ) : (
-            <Image
-              src={company.logo}
-              alt={company.name}
-              width={imageWidth}
-              height={imageHeight}
-              className="object-contain opacity-100"
-              onError={() => setImageError(true)}
-            />
-          )}
-        </div>
-      </div>
+      {logoContent}
     </ScrollReveal>
   )
 }

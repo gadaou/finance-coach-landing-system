@@ -6,6 +6,8 @@ import { AudienceFilterSection } from "@/components/landing/audience-filter-sect
 import { CurriculumSection } from "@/components/landing/curriculum-section"
 import { SocialProofSection } from "@/components/landing/social-proof-section"
 import { EnrollSection } from "@/components/landing/enroll-section"
+import { WhatsAppButton } from "@/components/whatsapp-button"
+import { MobileEnrollButton } from "@/components/mobile-enroll-button"
 
 export default function Page() {
   return (
@@ -18,6 +20,8 @@ export default function Page() {
       <SocialProofSection />
       <EnrollSection />
       <Footer />
+      <WhatsAppButton />
+      <MobileEnrollButton />
     </main>
   )
 }

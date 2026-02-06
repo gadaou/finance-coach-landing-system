@@ -5,7 +5,7 @@ import { CheckCircle2, XCircle, GraduationCap, Briefcase, AlertTriangle } from "
 
 export function AudienceFilterSection() {
   return (
-    <section className="pt-4 md:pt-24 pb-12 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
+    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
@@ -14,13 +14,10 @@ export function AudienceFilterSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-12 pt-0 md:pt-0" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 pt-0 md:pt-0" dir="rtl">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               <span className="text-primary">لمن</span> هذا الكورس؟
             </h2>
-            <p className="text-lg text-muted-foreground">
-              نحدد بوضوح لمن هذا البرنامج ومن يجب أن يفكر مرتين قبل التسجيل
-            </p>
           </div>
         </ScrollReveal>
 

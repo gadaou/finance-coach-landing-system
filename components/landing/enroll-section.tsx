@@ -48,7 +48,7 @@ export function EnrollSection() {
   }
 
   return (
-    <section id="enroll" className="pt-2 md:pt-24 pb-12 md:pb-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
+    <section id="enroll" className="pt-16 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -58,7 +58,7 @@ export function EnrollSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal animation="fade-in-up">
-            <div className="text-center mb-12 -mt-12" dir="rtl">
+            <div className="text-center mb-12 -mt-0 md:-mt-12" dir="rtl">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
                 <Shield className="h-4 w-4" />
                 ابدأ رحلتك الآن

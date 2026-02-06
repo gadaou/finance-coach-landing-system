@@ -36,26 +36,9 @@ export function Footer() {
   return (
     <footer className="bg-secondary text-secondary-foreground overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-        {/* Top Section - Three Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-          {/* Left Column - Services */}
-          <div>
-            <h3 className="font-bold text-sm md:text-base mb-2 uppercase tracking-wider">Services</h3>
-            <ul className="space-y-1 md:space-y-1.5 text-sm">
-              <li>
-                <a href="#why-choose-us" className="hover:text-primary transition-colors block py-1">
-                  Why Choose Us
-                </a>
-              </li>
-              <li>
-                <a href="#testimonials" className="hover:text-primary transition-colors block py-1">
-                  Success Stories
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Middle Column - Resources */}
+        {/* Top Section - Two Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
+          {/* Left Column - Resources */}
           <div>
             <h3 className="font-bold text-sm md:text-base mb-2 uppercase tracking-wider">Resources</h3>
             <ul className="space-y-1 md:space-y-1.5 text-sm">
@@ -77,7 +60,7 @@ export function Footer() {
           </div>
 
           {/* Right Column - Join Our Community */}
-          <div className="sm:col-span-2 md:col-span-1">
+          <div>
             <h3 className="font-bold text-sm md:text-base mb-2 uppercase tracking-wider">Join Our Community</h3>
             <p className="text-xs text-secondary-foreground/80 mb-2">
               Subscribe for exclusive insights and special offers

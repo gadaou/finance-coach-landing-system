@@ -1,13 +1,14 @@
 "use client"
 
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { MousePointerClick, Building2, TrendingUp, CheckCircle2, Calendar } from "lucide-react"
+import { MousePointerClick, Building2, TrendingUp, CheckCircle2, Calendar, ChevronDown } from "lucide-react"
 import { SkillProgressionChart, TimelineProgressChart } from "./animated-charts"
 import { useEffect, useState, useRef } from "react"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 
 export function CurriculumSection() {
   return (
-    <section className="pt-12 md:pt-24 pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
+    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -16,18 +17,15 @@ export function CurriculumSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-16 -mt-8" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 -mt-8" dir="rtl">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               المنهج <span className="text-primary">"الجاهز للمكتب"</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
-              لا تكتب عناوين فصول مملة، اكتب نتائج. هذا ما ستتعلمه بالضبط
-            </p>
           </div>
         </ScrollReveal>
 
         {/* Curriculum Timeline */}
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-6 md:space-y-12">
           {[
             {
               weeks: "الأسبوع 1-2",
@@ -74,7 +72,7 @@ export function CurriculumSection() {
         </div>
 
         {/* Charts Section */}
-        <div className="max-w-6xl mx-auto mt-20 space-y-8">
+        <div className="max-w-6xl mx-auto mt-8 md:mt-20 space-y-8">
           {/* Two Column Charts */}
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal animation="slide-in-right">
@@ -122,6 +120,7 @@ function CurriculumModule({
   }
   index: number
 }) {
+  const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -146,52 +145,70 @@ function CurriculumModule({
     <ScrollReveal animation={index % 2 === 0 ? "slide-in-right" : "slide-in-left"}>
       <div
         ref={ref}
-        className={`group relative overflow-hidden rounded-2xl bg-gradient-to-r ${module.color} p-1 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${
+        className={`group relative overflow-hidden rounded-2xl bg-gradient-to-r ${module.color} p-1 transition-all duration-500 hover:shadow-2xl ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        <div className="bg-card rounded-2xl p-6 md:p-8 relative overflow-hidden" dir="rtl">
-          {/* Shimmer effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <div className="bg-card rounded-2xl relative overflow-hidden" dir="rtl">
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
-          <div className="relative z-10">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="p-4 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 flex-shrink-0">
-                <module.icon className="h-6 w-6 md:h-8 md:w-8" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <Calendar className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-semibold text-primary">{module.weeks}</span>
+            <CollapsibleTrigger className="w-full text-right hover:bg-muted/30 transition-colors duration-200">
+              <div className="relative z-10 p-6 md:p-8">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="p-4 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 flex-shrink-0">
+                      <module.icon className="h-6 w-6 md:h-8 md:w-8" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Calendar className="h-5 w-5 text-primary" />
+                        <span className="text-sm font-semibold text-primary">{module.weeks}</span>
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold">{module.title}</h3>
+                    </div>
+                  </div>
+                  <ChevronDown 
+                    className={`h-6 w-6 text-primary transition-transform duration-300 flex-shrink-0 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-2">{module.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{module.subtitle}</p>
-                <p className="text-base leading-relaxed mb-6">{module.description}</p>
               </div>
-            </div>
+            </CollapsibleTrigger>
 
-            <div className="space-y-3">
-              <h4 className="font-semibold text-lg flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                النتائج المتوقعة:
-              </h4>
-              <ul className="space-y-2">
-                {module.outcomes.map((outcome, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all"
-                    style={{
-                      animation: `fadeInUp 0.5s ease-out ${i * 100}ms both`,
-                    }}
-                  >
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">{outcome}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden">
+              <div className="relative z-10 px-6 md:px-8 pb-6 md:pb-8 pt-0" dir="rtl">
+                <div className="mb-6">
+                  <p className="text-sm text-muted-foreground mb-4">{module.subtitle}</p>
+                  <p className="text-base leading-relaxed mb-6">{module.description}</p>
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-lg flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    النتائج المتوقعة:
+                  </h4>
+                  <ul className="space-y-2">
+                    {module.outcomes.map((outcome, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all"
+                        style={{
+                          animation: `fadeInUp 0.5s ease-out ${i * 100}ms both`,
+                        }}
+                      >
+                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                        <span className="text-sm">{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </CollapsibleContent>
           </div>
-        </div>
+        </Collapsible>
       </div>
     </ScrollReveal>
   )
