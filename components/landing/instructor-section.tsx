@@ -28,7 +28,7 @@ export function InstructorSection() {
   }, [])
 
   return (
-    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
+    <section className="pt-8 md:pt-24 lg:pt-14 pb-8 md:pb-24 lg:pb-14 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -145,17 +145,10 @@ export function InstructorSection() {
                   لأنك ستتعلم من{" "}
                   <span className="text-primary">الأفضل</span>
                 </h2>
-                <div className="text-base md:text-xl">
-                  <span className="text-primary font-semibold">Certified</span> (CFA + CMA/FMVA)
-                </div>
-
                 <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                  مدربونا ليسوا فقط حاصلين على FMVA، بل هم Certified ويعملون كمدراء ماليين في كبرى الشركات.
-                </p>
-
-                <p className="text-sm md:text-lg text-foreground font-medium">
-                  أنت لا تدرس منهجاً، أنت تدرس{" "}
-                  <span className="text-primary">خبرة سنين</span>
+                  مدربونا ليسوا فقط حاصلين على FMVA، بل هم{" "}
+                  <span className="text-primary font-semibold">Double Certified</span> (CFA + CMA/FMVA) ويعملون كمدراء ماليين في كبرى الشركات. أنت لا تدرس منهجاً، أنت تدرس{" "}
+                  <span className="text-primary font-semibold">خبرة سنين</span>.
                 </p>
 
                 {/* Credentials */}

@@ -52,15 +52,15 @@ export function HeroSection() {
           </ScrollReveal>
 
           <ScrollReveal animation="fade-in-up" delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2 md:pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2 md:pt-4 px-1">
               <Button
                 size="lg"
                 onClick={scrollToEnroll}
-                className="relative border-2 border-primary bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 transition-all hover:scale-105 group overflow-hidden shadow-xl hover:shadow-2xl"
+                className="relative border-2 border-primary bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-base md:text-lg px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6 transition-all hover:scale-105 group overflow-hidden shadow-xl hover:shadow-2xl w-full sm:w-auto max-w-md sm:max-w-none"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  سجل الآن
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center justify-center gap-2 text-center flex-wrap">
+                  <span className="whitespace-normal leading-snug">سجل الآن - ضمان استرداد الأموال لمدة 7 أيام</span>
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               </Button>

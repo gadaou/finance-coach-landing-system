@@ -16,11 +16,11 @@ const notoSansArabic = localFont({
   display: "swap",
 })
 
-// <CHANGE> Updated metadata for Finance Coach ACCA landing page
+// FMVA Certification Hunter landing page
 export const metadata: Metadata = {
-  title: "ACCA Certification Training | Finance Coach Academy",
+  title: "FMVA التطبيقي | Finance Coach Academy",
   description:
-    "Become an ACCA-Qualified Professional with Finance Coach - Egypt's trusted ACCA Training Partner, empowering finance professionals since 2017",
+    "برنامج FMVA التطبيقي: حول معرفتك النظرية إلى خبرة عملية في النمذجة والتقييم المالي في 3 شهور. مدربون Double Certified - CFA + FMVA.",
   generator: "v0.app",
   icons: {
     icon: [

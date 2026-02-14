@@ -2,13 +2,13 @@
 
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { MousePointerClick, Building2, TrendingUp, CheckCircle2, Calendar, ChevronDown } from "lucide-react"
-import { SkillProgressionChart, TimelineProgressChart } from "./animated-charts"
+import { CertificationPillarsChart, TimelineProgressChart } from "./animated-charts"
 import { useEffect, useState, useRef } from "react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 
 export function CurriculumSection() {
   return (
-    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
+    <section className="pt-8 md:pt-24 lg:pt-14 pb-8 md:pb-24 lg:pb-14 bg-gradient-to-br from-background to-accent/20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -17,7 +17,7 @@ export function CurriculumSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 -mt-8" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 lg:mb-10 -mt-8" dir="rtl">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               المنهج <span className="text-primary">"الجاهز للمكتب"</span>
             </h2>
@@ -42,8 +42,8 @@ export function CurriculumSection() {
             },
             {
               weeks: "الأسبوع 3-4",
-              title: "بناء 3-Statement Model من الصفر",
-              subtitle: "Complete Financial Model for Listed Company",
+              title: "بناء 3-Statement Model لشركة مدرجة في البورصة المصرية من الصفر",
+              subtitle: "3-Statement Model for EGX Listed Company",
               icon: Building2,
               description: "بناء نموذج مالي كامل لشركة مدرجة في البورصة المصرية. من البيانات المالية إلى النموذج الجاهز.",
               outcomes: [
@@ -55,10 +55,10 @@ export function CurriculumSection() {
             },
             {
               weeks: "الأسبوع 5",
-              title: "أسئلة Valuation في مقابلات Big 4",
-              subtitle: "Big 4 Interview Preparation",
+              title: "كيف تجيب على أسئلة الـ Valuation في مقابلات \"Big 4\"؟",
+              subtitle: "Simulated Interviews",
               icon: TrendingUp,
-              description: "كيف تجيب على أسئلة التقييم المالي في مقابلات الشركات الكبرى؟ محاكاة كاملة للانترفيو التقني.",
+              description: "محاكاة كاملة للانترفيو التقني. كيف تجيب على أسئلة التقييم المالي في مقابلات الشركات الكبرى؟",
               outcomes: [
                 "إجابات جاهزة لأسئلة Valuation",
                 "ثقة في الانترفيو التقني",
@@ -80,9 +80,9 @@ export function CurriculumSection() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative p-3 sm:p-6 rounded-2xl bg-card border border-border shadow-xl">
                   <h3 className="text-base sm:text-xl font-extrabold mb-2 sm:mb-4 text-center" dir="rtl">
-                    تطور المهارات
+                    أركان الشهادة
                   </h3>
-                  <SkillProgressionChart />
+                  <CertificationPillarsChart />
                 </div>
               </div>
             </ScrollReveal>
@@ -92,7 +92,7 @@ export function CurriculumSection() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative p-6 rounded-2xl bg-card border border-border shadow-xl" dir="rtl">
                   <h3 className="text-base sm:text-xl font-bold mb-4 text-center">
-                    التقدم خلال البرنامج
+                    مستويات الإتقان
                   </h3>
                   <TimelineProgressChart />
                 </div>

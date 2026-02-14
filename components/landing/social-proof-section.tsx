@@ -4,8 +4,6 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { Quote, Building2, Users } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
-import { SkillsBreakdownChart } from "./animated-charts"
-
 export function SocialProofSection() {
   const companies = [
     { name: "CIB", logo: "/banks/CIB.png" },
@@ -15,7 +13,7 @@ export function SocialProofSection() {
   ]
 
   return (
-    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
+    <section className="pt-8 md:pt-24 lg:pt-14 pb-8 md:pb-24 lg:pb-14 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -23,24 +21,9 @@ export function SocialProofSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Skills Breakdown Chart */}
-        <ScrollReveal animation="fade-in-up">
-          <div className="max-w-4xl mx-auto mb-8 md:mb-20 mt-2 md:-mt-24">
-            <div className="relative group overflow-visible">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              <div className="relative p-4 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl overflow-visible">
-                <h3 className="text-xl md:text-3xl font-bold mb-2 text-center" dir="rtl">
-                  Skills Breakdown
-                </h3>
-                <SkillsBreakdownChart />
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-
         {/* Company Logos Section */}
         <ScrollReveal animation="fade-in-up">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16" dir="rtl">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 lg:mb-10" dir="rtl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
               <Building2 className="h-4 w-4" />
               خريجونا يعملون هنا
@@ -55,7 +38,7 @@ export function SocialProofSection() {
         </ScrollReveal>
 
         {/* Company Logos - Mobile Autoscroll / Desktop Grid */}
-        <div className="max-w-5xl mx-auto mb-4 md:mb-20">
+        <div className="max-w-5xl mx-auto mb-4 md:mb-20 lg:mb-12">
           {/* Mobile: Horizontal Autoscrolling */}
           <div className="md:hidden overflow-hidden">
             <div className="flex animate-scroll gap-6">
@@ -97,8 +80,7 @@ export function SocialProofSection() {
                     <Users className="h-4 w-4 md:h-6 md:w-6 text-primary" />
                   </div>
                   <div className="min-w-0">
-                    <div className="font-semibold text-sm md:text-lg">خريج FMVA</div>
-                    <div className="text-xs md:text-sm text-muted-foreground">موظف في CIB - Investment Banking</div>
+                    <div className="font-semibold text-sm md:text-lg">خريج FMVA - موظف في CIB - Investment Banking</div>
                   </div>
                 </div>
               </div>
@@ -109,11 +91,11 @@ export function SocialProofSection() {
         {/* CTA Section */}
         <ScrollReveal animation="fade-in-up">
           <div className="mt-8 md:mt-16 text-center">
-            <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20" dir="rtl">
-              <h3 className="text-xl md:text-3xl font-bold mb-4">
+            <div className="inline-block p-5 sm:p-6 md:p-8 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20 max-w-full" dir="rtl">
+              <h3 className="text-lg sm:text-xl md:text-3xl font-bold mb-3 sm:mb-4">
                 هل أنت جاهز لبدء رحلتك؟
               </h3>
-              <p className="text-base md:text-lg text-muted-foreground mb-6">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 sm:mb-6">
                 انضم إلى مئات الخريجين الذين غيروا مسارهم المهني
               </p>
               <button
@@ -123,7 +105,7 @@ export function SocialProofSection() {
                     element.scrollIntoView({ behavior: "smooth" })
                   }
                 }}
-                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                className="min-h-[44px] px-5 py-3 sm:px-8 sm:py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-sm sm:text-base hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 سجل الآن - ضمان 7 أيام
               </button>

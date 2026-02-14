@@ -1,25 +1,98 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { Zap, TrendingUp, Gem, Target, MousePointerClick, Building2, Briefcase } from "lucide-react"
+import { Zap, TrendingUp, Gem, Target, MousePointerClick, Building2, Briefcase, Award, FileCheck, Globe } from "lucide-react"
+
+// Certification pillars – animated bars (replaces "تطور المهارات" in curriculum)
+export function CertificationPillarsChart() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [values, setValues] = useState([0, 0, 0])
+  const chartRef = useRef<HTMLDivElement>(null)
+
+  const pillars = [
+    { label: "اعتماد الشهادة", value: 100, icon: Award },
+    { label: "سهولة الامتحان", value: 95, icon: FileCheck },
+    { label: "الاعتراف الدولي", value: 100, icon: Globe },
+  ]
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+          pillars.forEach((_, index) => {
+            setTimeout(() => {
+              setValues((prev) => {
+                const next = [...prev]
+                next[index] = pillars[index].value
+                return next
+              })
+            }, index * 250)
+          })
+        }
+      },
+      { threshold: 0.25 },
+    )
+    if (chartRef.current) observer.observe(chartRef.current)
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  return (
+    <div ref={chartRef} className="w-full h-48 sm:h-64 md:h-72 space-y-4 md:space-y-6" dir="rtl">
+      {pillars.map((pillar, index) => {
+        const Icon = pillar.icon
+        const current = values[index] ?? 0
+        return (
+          <div
+            key={index}
+            className="group"
+            style={{
+              opacity: isVisible ? 1 : 0.6,
+              transform: isVisible ? "translateX(0)" : "translateX(12px)",
+              transition: `opacity 0.5s ease-out ${index * 0.1}s, transform 0.5s ease-out ${index * 0.1}s`,
+            }}
+          >
+            <div className="flex items-center justify-between gap-2 mb-1.5">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Icon className="h-4 w-4 md:h-5 md:w-5" />
+                </div>
+                <span className="text-sm md:text-base font-semibold text-foreground">{pillar.label}</span>
+              </div>
+              <span className="text-sm font-bold text-primary tabular-nums">{current}%</span>
+            </div>
+            <div className="h-2.5 md:h-3 bg-muted rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-l from-primary via-primary/90 to-primary transition-all duration-700 ease-out relative overflow-hidden"
+                style={{ width: `${current}%` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 // Skill Progression Chart
 export function SkillProgressionChart() {
   const [isVisible, setIsVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [animatedData, setAnimatedData] = useState([
-    { skill: "Excel", value: 0 },
-    { skill: "Modeling", value: 0 },
-    { skill: "Valuation", value: 0 },
+    { skill: "إكسل", value: 0 },
+    { skill: "النمذجة", value: 0 },
+    { skill: "التقييم", value: 0 },
   ])
   const chartRef = useRef<HTMLDivElement>(null)
 
   const data = [
-    { skill: "Excel", value: 95 },
-    { skill: "Modeling", value: 90 },
-    { skill: "Valuation", value: 85 },
+    { skill: "إكسل", value: 95 },
+    { skill: "النمذجة", value: 90 },
+    { skill: "التقييم", value: 85 },
   ]
 
   useEffect(() => {
@@ -103,16 +176,19 @@ export function SkillProgressionChart() {
   )
 }
 
-// Timeline Progress Chart - Luxury Redesign
+// Mastery Levels – elegant animated circular gauges (different topic, super elegant)
+const CIRCLE_R = 42
+const CIRCLE_C = 2 * Math.PI * CIRCLE_R
+
 export function TimelineProgressChart() {
   const [isVisible, setIsVisible] = useState(false)
-  const [animatedProgress, setAnimatedProgress] = useState([0, 0, 0])
+  const [values, setValues] = useState([0, 0, 0])
   const chartRef = useRef<HTMLDivElement>(null)
 
-  const milestones = [
-    { week: "أسبوع 1-2", progress: 30, label: "Excel Mastery", icon: MousePointerClick },
-    { week: "أسبوع 3-4", progress: 70, label: "Financial Modeling", icon: Building2 },
-    { week: "أسبوع 5", progress: 100, label: "Interview Ready", icon: Briefcase },
+  const items = [
+    { value: 95, label: "إتقان إكسل", icon: MousePointerClick },
+    { value: 90, label: "النمذجة المالية", icon: Building2 },
+    { value: 100, label: "التقييم والمقابلات", icon: Briefcase },
   ]
 
   useEffect(() => {
@@ -120,118 +196,98 @@ export function TimelineProgressChart() {
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
           setIsVisible(true)
-          milestones.forEach((_, index) => {
+          items.forEach((item, index) => {
             setTimeout(() => {
-              setAnimatedProgress((prev) => {
-                const newProgress = [...prev]
-                newProgress[index] = milestones[index].progress
-                return newProgress
+              setValues((prev) => {
+                const next = [...prev]
+                next[index] = item.value
+                return next
               })
-            }, index * 500)
+            }, index * 280)
           })
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.2, rootMargin: "0px 0px -30px 0px" },
     )
-
-    if (chartRef.current) {
-      observer.observe(chartRef.current)
-    }
-
+    if (chartRef.current) observer.observe(chartRef.current)
     return () => observer.disconnect()
   }, [isVisible])
 
   return (
-    <div ref={chartRef} className="w-full h-80 md:h-96 relative" dir="rtl">
-      {/* Luxury Timeline with Milestones */}
-      <div className="relative h-full flex flex-col justify-between">
-        {/* Progress Line - right-aligned for RTL */}
-        <div className="absolute right-8 md:right-12 left-auto top-0 bottom-0 w-1 bg-gradient-to-b from-primary/20 via-primary/40 to-primary/20">
-          {/* Animated progress fill */}
-          <div
-            className="absolute top-0 right-0 left-0 w-full bg-gradient-to-b from-primary via-primary/80 to-primary transition-all duration-2000 ease-out"
-            style={{
-              height: isVisible ? `${animatedProgress[2]}%` : "0%",
-            }}
-          />
-          {/* Glow effect */}
-          <div
-            className="absolute top-0 right-1/2 translate-x-1/2 left-auto w-3 h-full bg-primary/30 blur-md transition-all duration-2000 ease-out"
-            style={{
-              height: isVisible ? `${animatedProgress[2]}%` : "0%",
-            }}
-          />
-        </div>
-
-        {/* Milestones */}
-        {milestones.map((milestone, index) => {
-          const IconComponent = milestone.icon
+    <div ref={chartRef} className="w-full relative" dir="rtl">
+      <div className="grid grid-cols-3 gap-3 sm:gap-6">
+        {items.map((item, index) => {
+          const IconComponent = item.icon
+          const current = values[index] ?? 0
+          const strokeOffset = CIRCLE_C * (1 - current / 100)
           return (
             <div
               key={index}
-              className="relative flex items-center gap-4 md:gap-6 group"
+              className="flex flex-col items-center"
               style={{
-                opacity: isVisible && animatedProgress[index] > 0 ? 1 : 0.3,
-                transform: isVisible && animatedProgress[index] > 0 ? "translateX(0)" : "translateX(-20px)",
-                transition: `all 0.8s ease-out ${index * 0.3}s`,
+                opacity: isVisible ? 1 : 0.4,
+                transform: isVisible ? "translateY(0) scale(1)" : "translateY(8px) scale(0.96)",
+                transition: `opacity 0.6s ease-out ${index * 0.1}s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s`,
               }}
             >
-              {/* Milestone Circle */}
-              <div className="relative z-10 flex-shrink-0">
-                <div
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-background bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-primary/50 ${
-                    animatedProgress[index] > 0 ? "ring-4 ring-primary/30" : ""
-                  }`}
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+                <svg
+                  className="w-full h-full -rotate-90"
+                  viewBox="0 0 100 100"
+                  aria-hidden
                 >
-                  <IconComponent className="w-7 h-7 md:w-9 md:h-9 text-primary-foreground" />
+                  <defs>
+                    <linearGradient id={`mastery-grad-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.9} />
+                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0.5} />
+                    </linearGradient>
+                    <filter id={`glow-${index}`}>
+                      <feGaussianBlur stdDeviation="1.5" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="42"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    className="text-muted/20"
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="42"
+                    fill="none"
+                    stroke={`url(#mastery-grad-${index})`}
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeDasharray={CIRCLE_C}
+                    strokeDashoffset={strokeOffset}
+                    style={{
+                      transition: "stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1)",
+                    }}
+                    filter={`url(#glow-${index})`}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-primary/80 mb-0.5" aria-hidden />
+                  <span className="text-sm sm:text-base font-bold text-primary tabular-nums">{current}%</span>
                 </div>
-                {/* Slow cinematic pulse animation */}
-                {animatedProgress[index] > 0 && (
-                  <>
-                    <div 
-                      className="absolute inset-0 rounded-full bg-primary/30"
-                      style={{
-                        animation: "pulse-cinematic 4s ease-in-out infinite",
-                      }}
-                    />
-                    <div 
-                      className="absolute inset-0 rounded-full bg-primary/20"
-                      style={{
-                        animation: "pulse-cinematic 4s ease-in-out infinite 1s",
-                      }}
-                    />
-                  </>
-                )}
               </div>
-
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs md:text-sm font-semibold text-primary">
-                  {milestone.week}
-                </span>
-                <span className="text-base md:text-xl font-bold text-foreground">
-                  {milestone.label}
-                </span>
-              </div>
-              {/* Progress Bar - RTL fill */}
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-l from-primary via-primary/90 to-primary rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
-                  style={{
-                    width: `${animatedProgress[index]}%`,
-                  }}
-                >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/30 to-transparent animate-shimmer" />
-                </div>
-              </div>
-              {/* Percentage */}
-              <div className="mt-1 text-xs md:text-sm text-muted-foreground">
-                {animatedProgress[index]}% مكتمل
-              </div>
+              <p
+                className="text-center text-xs sm:text-sm font-medium text-foreground mt-2 sm:mt-3 leading-tight max-w-[4.5rem] sm:max-w-[5rem]"
+                style={{
+                  transition: `opacity 0.5s ease-out ${index * 0.1 + 0.2}s`,
+                }}
+              >
+                {item.label}
+              </p>
             </div>
-          </div>
           )
         })}
       </div>
@@ -390,227 +446,6 @@ export function SkillMasteryDashboard() {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-// Skills Breakdown Pie Chart - Luxury Animated
-export function SkillsBreakdownChart() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [animatedData, setAnimatedData] = useState([
-    { name: "Financial Modeling", value: 0 },
-    { name: "Finance", value: 0 },
-    { name: "Excel", value: 0 },
-    { name: "Valuation", value: 0 },
-    { name: "Budgeting & Forecasting", value: 0 },
-    { name: "Presentation & Visuals", value: 0 },
-    { name: "Accounting", value: 0 },
-    { name: "Strategy", value: 0 },
-  ])
-  const chartRef = useRef<HTMLDivElement>(null)
-
-  const data = [
-    { name: "Financial Modeling", value: 25 },
-    { name: "Finance", value: 23 },
-    { name: "Excel", value: 17 },
-    { name: "Valuation", value: 10 },
-    { name: "Budgeting & Forecasting", value: 8 },
-    { name: "Presentation & Visuals", value: 8 },
-    { name: "Accounting", value: 5 },
-    { name: "Strategy", value: 4 },
-  ]
-
-  // Brand green colors - gradient from dark to light
-  const COLORS = [
-    "hsl(140, 60%, 45%)",  // Dark green - Financial Modeling
-    "hsl(140, 60%, 48%)",  // Finance
-    "hsl(140, 60%, 52%)",  // Excel
-    "hsl(140, 60%, 55%)",  // Valuation
-    "hsl(140, 60%, 58%)",  // Budgeting
-    "hsl(140, 60%, 61%)",  // Presentation
-    "hsl(140, 60%, 64%)",  // Accounting
-    "hsl(140, 60%, 67%)",  // Light green - Strategy
-  ]
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true)
-          // Animate values sequentially
-          data.forEach((item, index) => {
-            setTimeout(() => {
-              setAnimatedData((prev) => {
-                const newData = [...prev]
-                newData[index] = { ...newData[index], value: item.value }
-                return newData
-              })
-            }, index * 150)
-          })
-        }
-      },
-      { threshold: 0.3 },
-    )
-
-    if (chartRef.current) {
-      observer.observe(chartRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [isVisible])
-
-  const renderCustomLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    name,
-    value,
-  }: any) => {
-    const RADIAN = Math.PI / 180
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
-    const x = cx + radius * Math.cos(-midAngle * RADIAN)
-    const y = cy + radius * Math.sin(-midAngle * RADIAN)
-    
-    // Determine if mobile based on radius size (mobile uses smaller radius)
-    const isMobileSize = outerRadius <= 90
-    const labelRadius = outerRadius + (isMobileSize ? 20 : 30)
-    const labelX = cx + labelRadius * Math.cos(-midAngle * RADIAN)
-    const labelY = cy + labelRadius * Math.sin(-midAngle * RADIAN)
-
-    return (
-      <g>
-        {/* Dashed line from pie to label - hide on mobile */}
-        {!isMobileSize && (
-          <line
-            x1={x}
-            y1={y}
-            x2={labelX}
-            y2={labelY}
-            stroke="hsl(var(--muted-foreground))"
-            strokeWidth={1}
-            strokeDasharray="3 3"
-            opacity={0.4}
-          />
-        )}
-        {/* Percentage inside pie */}
-        <text
-          x={x}
-          y={y}
-          fill="white"
-          textAnchor="middle"
-          dominantBaseline="central"
-          fontSize={isMobileSize ? 10 : 12}
-          fontWeight="bold"
-        >
-          {`${value}%`}
-        </text>
-        {/* Label outside pie - hide on mobile */}
-        {!isMobileSize && (
-          <text
-            x={labelX}
-            y={labelY}
-            fill="hsl(var(--foreground))"
-            textAnchor={labelX > cx ? "start" : "end"}
-            dominantBaseline="central"
-            fontSize={12}
-            fontWeight="medium"
-          >
-            {name}
-          </text>
-        )}
-      </g>
-    )
-  }
-
-  const renderCustomLegend = (props: any) => {
-    const { payload } = props
-    return (
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 px-2">
-        {payload.map((entry: any, index: number) => (
-          <div key={index} className="flex items-center gap-1.5 sm:gap-2">
-            <div
-              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full flex-shrink-0"
-              style={{ backgroundColor: entry.color }}
-            />
-            <span className="text-xs sm:text-sm text-muted-foreground">{entry.value}</span>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  return (
-    <div ref={chartRef} className="w-full h-[480px] sm:h-96 md:h-[500px] relative overflow-visible px-2 -my-16 sm:my-0">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart margin={{ top: 30, right: 30, bottom: isMobile ? 50 : 80, left: 30 }}>
-          <Pie
-            data={animatedData}
-            cx="50%"
-            cy={isMobile ? "52%" : "50%"}
-            labelLine={!isMobile}
-            label={renderCustomLabel}
-            outerRadius={isMobile ? 75 : 120}
-            innerRadius={isMobile ? 38 : 60}
-            fill="#8884d8"
-            dataKey="value"
-            animationBegin={0}
-            animationDuration={1500}
-            isAnimationActive={isVisible}
-          >
-            {animatedData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-                style={{
-                  filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
-                  transition: "all 0.3s ease-out",
-                }}
-              />
-            ))}
-          </Pie>
-          <ChartTooltip
-            content={({ active, payload }) => {
-              if (active && payload && payload.length) {
-                return (
-                  <div className="rounded-lg border bg-background p-2 shadow-sm">
-                    <div className="grid gap-2">
-                      <div className="flex items-center gap-2">
-                        <div
-                          className="h-3 w-3 rounded-full"
-                          style={{ backgroundColor: payload[0].payload.fill }}
-                        />
-                        <span className="font-medium">{payload[0].name}</span>
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {payload[0].value}%
-                      </div>
-                    </div>
-                  </div>
-                )
-              }
-              return null
-            }}
-          />
-          <Legend
-            content={renderCustomLegend}
-            wrapperStyle={{ paddingTop: isMobile ? "10px" : "20px" }}
-          />
-        </PieChart>
-      </ResponsiveContainer>
     </div>
   )
 }

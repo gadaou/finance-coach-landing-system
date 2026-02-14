@@ -48,7 +48,7 @@ export function EnrollSection() {
   }
 
   return (
-    <section id="enroll" className="pt-16 md:pt-24 pb-4 md:pb-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
+    <section id="enroll" className="pt-16 md:pt-24 lg:pt-14 pb-4 md:pb-24 lg:pb-14 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -58,15 +58,15 @@ export function EnrollSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal animation="fade-in-up">
-            <div className="text-center mb-6 md:mb-12 -mt-0 md:-mt-12" dir="rtl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
-                <Shield className="h-4 w-4" />
+            <div className="text-center mb-5 md:mb-12 -mt-0 md:-mt-12 px-1" dir="rtl">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-primary/10 border border-primary/20 rounded-full text-xs sm:text-sm font-medium text-primary mb-4 sm:mb-6">
+                <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 ابدأ رحلتك الآن
               </div>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+              <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-balance leading-snug break-words">
                 سجل في برنامج <span className="text-primary">FMVA</span> الآن
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 احجز استشارتك المجانية وابدأ رحلتك نحو التحليل المالي المتقدم
               </p>
             </div>
@@ -81,10 +81,11 @@ export function EnrollSection() {
                   <ul className="space-y-2 md:space-y-4">
                     {[
                       "برنامج تدريبي متكامل جاهز للمكتب",
-                      "مدربون معتمدون Certified",
+                      "مدربون Double Certified (CFA + FMVA)",
                       "دعم مستمر أثناء وبعد البرنامج",
                       "إعداد كامل لمقابلات Big 4",
-                      "شهادة معتمدة في FMVA",
+                      "شهادة FMVA معتمدة",
+                      "خطة دفع مرنة (50% الآن، 50% منتصف الكورس)",
                     ].map((item, index) => (
                       <li
                         key={index}
@@ -106,7 +107,7 @@ export function EnrollSection() {
                     <span className="font-semibold text-base md:text-lg">ضمان 7 أيام</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    إذا لم تكن راضياً عن البرنامج خلال أول 7 أيام، سنعيد لك أموالك بالكامل بدون أي أسئلة.
+                    إذا لم تكن راضياً خلال أول 7 أيام، سنعيد لك أموالك بالكامل.
                   </p>
                 </div>
               </div>
@@ -115,15 +116,15 @@ export function EnrollSection() {
             {/* Form */}
             <ScrollReveal animation="slide-in-left">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                <div className="relative p-8 md:p-10 rounded-2xl bg-card border-2 border-primary/20 shadow-2xl" dir="rtl">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-xl md:rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+                <div className="relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl bg-card border-2 border-primary/20 shadow-2xl" dir="rtl">
                   {isSubmitted ? (
-                    <div className="text-center py-12">
-                      <div className="inline-flex p-4 rounded-full bg-primary/10 text-primary mb-6">
-                        <CheckCircle2 className="h-12 w-12" />
+                    <div className="text-center py-8 sm:py-12">
+                      <div className="inline-flex p-3 sm:p-4 rounded-full bg-primary/10 text-primary mb-4 sm:mb-6">
+                        <CheckCircle2 className="h-10 w-10 sm:h-12 sm:w-12" />
                       </div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-4">شكراً لك!</h3>
-                      <p className="text-muted-foreground">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">شكراً لك!</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground px-2">
                         تم استلام معلوماتك. سيتواصل معك فريقنا خلال 24 ساعة لحجز استشارتك المجانية.
                       </p>
                     </div>
@@ -132,12 +133,12 @@ export function EnrollSection() {
                       action="https://formsubmit.co/info@financecoach.co" 
                       method="POST"
                       onSubmit={handleSubmit} 
-                      className="space-y-6"
+                      className="space-y-4 sm:space-y-5 md:space-y-6"
                     >
                       <input type="hidden" name="_subject" value="FMVA Enrollment Form Submission" />
                       <input type="hidden" name="_captcha" value="false" />
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="text-right">الاسم الكامل</Label>
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <Label htmlFor="name" className="text-right text-sm sm:text-base">الاسم الكامل</Label>
                         <Input
                           id="name"
                           name="name"
@@ -145,13 +146,13 @@ export function EnrollSection() {
                           value={formData.name}
                           onChange={(e) => handleChange("name", e.target.value)}
                           placeholder="أدخل اسمك الكامل"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="min-h-[44px] h-11 sm:h-12 text-base focus:ring-2 focus:ring-primary focus:border-primary text-right px-3 sm:px-4"
                           dir="rtl"
                         />
                       </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-right">البريد الإلكتروني</Label>
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <Label htmlFor="email" className="text-right text-sm sm:text-base">البريد الإلكتروني</Label>
                         <Input
                           id="email"
                           name="email"
@@ -160,13 +161,13 @@ export function EnrollSection() {
                           value={formData.email}
                           onChange={(e) => handleChange("email", e.target.value)}
                           placeholder="example@email.com"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="min-h-[44px] h-11 sm:h-12 text-base focus:ring-2 focus:ring-primary focus:border-primary text-right px-3 sm:px-4"
                           dir="rtl"
                         />
                       </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-right">رقم الهاتف</Label>
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <Label htmlFor="phone" className="text-right text-sm sm:text-base">رقم الهاتف</Label>
                         <Input
                           id="phone"
                           name="phone"
@@ -175,7 +176,7 @@ export function EnrollSection() {
                           value={formData.phone}
                           onChange={(e) => handleChange("phone", e.target.value)}
                           placeholder="+20 XXX XXX XXXX"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="min-h-[44px] h-11 sm:h-12 text-base focus:ring-2 focus:ring-primary focus:border-primary text-right px-3 sm:px-4"
                           dir="rtl"
                         />
                       </div>
@@ -183,15 +184,15 @@ export function EnrollSection() {
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] text-lg font-semibold group"
+                        className="w-full min-h-[48px] h-auto py-3.5 sm:py-4 md:py-5 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] text-sm sm:text-base md:text-lg font-semibold group"
                       >
-                        <span className="flex items-center justify-center gap-2">
-                          سجل الآن - ضمان 7 أيام
-                          <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        <span className="flex items-center justify-center gap-2 text-center flex-wrap px-2">
+                          <span className="whitespace-normal leading-snug">سجل الآن - ضمان استرداد الأموال لمدة 7 أيام</span>
+                          <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                         </span>
                       </Button>
 
-                      <p className="text-xs text-center text-muted-foreground">
+                      <p className="text-[11px] sm:text-xs text-center text-muted-foreground px-1">
                         بالضغط على "سجل الآن"، أنت توافق على شروط الاستخدام وسياسة الخصوصية
                       </p>
                     </form>

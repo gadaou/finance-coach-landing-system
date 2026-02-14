@@ -5,7 +5,7 @@ import { CheckCircle2, XCircle, GraduationCap, Briefcase, AlertTriangle } from "
 
 export function AudienceFilterSection() {
   return (
-    <section className="pt-8 md:pt-24 pb-8 md:pb-24 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
+    <section className="pt-8 md:pt-24 lg:pt-14 pb-8 md:pb-24 lg:pb-14 bg-gradient-to-br from-background via-primary/5 to-background relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
@@ -68,8 +68,7 @@ export function AudienceFilterSection() {
                   <div className="flex items-start gap-3">
                     <XCircle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                     <p className="text-base leading-relaxed">
-                      هذا الكورس غير مناسب لطلاب السنة الأولى والثانية. نحن نركز على{" "}
-                      <span className="font-semibold text-orange-600">التوظيف الفوري</span>.
+                      هذا الكورس غير مناسب لطلاب السنة الأولى والثانية (نحن نركز على التوظيف الفوري).
                     </p>
                   </div>
                 </div>
