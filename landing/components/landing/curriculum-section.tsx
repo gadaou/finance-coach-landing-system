@@ -17,10 +17,10 @@ export function CurriculumSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               المنهج <span className="text-primary">"الجاهز للمكتب"</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               لا تكتب عناوين فصول مملة، اكتب نتائج. هذا ما ستتعلمه بالضبط
             </p>
           </div>
@@ -77,7 +77,7 @@ export function CurriculumSection() {
         <div className="max-w-6xl mx-auto mt-20 grid md:grid-cols-2 gap-8">
           <ScrollReveal animation="slide-in-right">
             <div className="p-6 rounded-2xl bg-card border border-border shadow-xl">
-              <h3 className="text-xl font-bold mb-4 text-center" dir="rtl">
+              <h3 className="text-base sm:text-xl font-bold mb-4 text-center" dir="rtl">
                 تطور المهارات
               </h3>
               <SkillProgressionChart />
@@ -85,8 +85,8 @@ export function CurriculumSection() {
           </ScrollReveal>
 
           <ScrollReveal animation="slide-in-left">
-            <div className="p-6 rounded-2xl bg-card border border-border shadow-xl">
-              <h3 className="text-xl font-bold mb-4 text-center" dir="rtl">
+            <div className="p-6 rounded-2xl bg-card border border-border shadow-xl" dir="rtl">
+              <h3 className="text-base sm:text-xl font-bold mb-4 text-center">
                 التقدم خلال البرنامج
               </h3>
               <TimelineProgressChart />
@@ -155,17 +155,13 @@ function CurriculumModule({
                   <Calendar className="h-5 w-5 text-primary" />
                   <span className="text-sm font-semibold text-primary">{module.weeks}</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-2">{module.title}</h3>
+                <h3 className="text-xl md:text-3xl font-bold mb-2">{module.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{module.subtitle}</p>
                 <p className="text-base leading-relaxed mb-6">{module.description}</p>
               </div>
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-lg flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                النتائج المتوقعة:
-              </h4>
               <ul className="space-y-2">
                 {module.outcomes.map((outcome, i) => (
                   <li

@@ -142,21 +142,21 @@ export function TimelineProgressChart() {
   }, [isVisible])
 
   return (
-    <div ref={chartRef} className="w-full h-80 md:h-96 relative">
+    <div ref={chartRef} className="w-full h-80 md:h-96 relative" dir="rtl">
       {/* Luxury Timeline with Milestones */}
       <div className="relative h-full flex flex-col justify-between">
-        {/* Progress Line */}
-        <div className="absolute left-8 md:left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/20 via-primary/40 to-primary/20">
+        {/* Progress Line - right-aligned for RTL */}
+        <div className="absolute right-8 md:right-12 left-auto top-0 bottom-0 w-1 bg-gradient-to-b from-primary/20 via-primary/40 to-primary/20">
           {/* Animated progress fill */}
           <div
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary via-primary/80 to-primary transition-all duration-2000 ease-out"
+            className="absolute top-0 right-0 left-0 w-full bg-gradient-to-b from-primary via-primary/80 to-primary transition-all duration-2000 ease-out"
             style={{
               height: isVisible ? `${animatedProgress[2]}%` : "0%",
             }}
           />
           {/* Glow effect */}
           <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-full bg-primary/30 blur-md transition-all duration-2000 ease-out"
+            className="absolute top-0 right-1/2 translate-x-1/2 left-auto w-3 h-full bg-primary/30 blur-md transition-all duration-2000 ease-out"
             style={{
               height: isVisible ? `${animatedProgress[2]}%` : "0%",
             }}
@@ -210,20 +210,20 @@ export function TimelineProgressChart() {
                 <span className="text-xs md:text-sm font-semibold text-primary">
                   {milestone.week}
                 </span>
-                <span className="text-lg md:text-xl font-bold text-foreground">
+                <span className="text-base md:text-xl font-bold text-foreground">
                   {milestone.label}
                 </span>
               </div>
-              {/* Progress Bar */}
+              {/* Progress Bar - RTL fill */}
               <div className="h-2 bg-muted rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-primary via-primary/90 to-primary rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
+                  className="h-full bg-gradient-to-l from-primary via-primary/90 to-primary rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
                   style={{
                     width: `${animatedProgress[index]}%`,
                   }}
                 >
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/30 to-transparent animate-shimmer" />
                 </div>
               </div>
               {/* Percentage */}

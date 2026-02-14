@@ -29,7 +29,7 @@ export function SocialProofSection() {
             <div className="relative group overflow-visible">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/50 rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
               <div className="relative p-4 md:p-8 rounded-2xl bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl overflow-visible">
-                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-center" dir="rtl">
+                <h3 className="text-xl md:text-3xl font-bold mb-2 text-center" dir="rtl">
                   Skills Breakdown
                 </h3>
                 <SkillsBreakdownChart />
@@ -45,17 +45,17 @@ export function SocialProofSection() {
               <Building2 className="h-4 w-4" />
               خريجونا يعملون هنا
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               شركات <span className="text-primary">عالمية</span> تثق بنا
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               انضم إلى مئات الخريجين الذين يعملون في أكبر الشركات المالية
             </p>
           </div>
         </ScrollReveal>
 
         {/* Company Logos - Mobile Autoscroll / Desktop Grid */}
-        <div className="max-w-5xl mx-auto mb-8 md:mb-20">
+        <div className="max-w-5xl mx-auto mb-4 md:mb-20">
           {/* Mobile: Horizontal Autoscrolling */}
           <div className="md:hidden overflow-hidden">
             <div className="flex animate-scroll gap-6">
@@ -84,21 +84,21 @@ export function SocialProofSection() {
 
         {/* Testimonial Section */}
         <ScrollReveal animation="fade-in-up">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto mt-4 md:mt-0">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              <div className="relative p-8 md:p-12 rounded-2xl bg-card border-2 border-primary/20 shadow-xl" dir="rtl">
-                <Quote className="h-12 w-12 text-primary/20 mb-6" />
-                <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-6 text-foreground">
+              <div className="relative p-4 md:p-12 rounded-xl md:rounded-2xl bg-card border-2 border-primary/20 shadow-xl" dir="rtl">
+                <Quote className="h-8 w-8 md:h-12 md:w-12 text-primary/20 mb-3 md:mb-6" />
+                <blockquote className="text-sm md:text-2xl font-medium leading-snug md:leading-relaxed mb-4 md:mb-6 text-foreground">
                   "كنت خايف من الانترفيو التقني، لكن بعد الكورس جاوبت على كل الأسئلة بثقة واشتغلت في CIB."
                 </blockquote>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users className="h-6 w-6 text-primary" />
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Users className="h-4 w-4 md:h-6 md:w-6 text-primary" />
                   </div>
-                  <div>
-                    <div className="font-semibold text-lg">خريج FMVA</div>
-                    <div className="text-sm text-muted-foreground">موظف في CIB - Investment Banking</div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-sm md:text-lg">خريج FMVA</div>
+                    <div className="text-xs md:text-sm text-muted-foreground">موظف في CIB - Investment Banking</div>
                   </div>
                 </div>
               </div>
@@ -108,12 +108,12 @@ export function SocialProofSection() {
 
         {/* CTA Section */}
         <ScrollReveal animation="fade-in-up">
-          <div className="mt-16 text-center">
+          <div className="mt-8 md:mt-16 text-center">
             <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20" dir="rtl">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              <h3 className="text-xl md:text-3xl font-bold mb-4">
                 هل أنت جاهز لبدء رحلتك؟
               </h3>
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="text-base md:text-lg text-muted-foreground mb-6">
                 انضم إلى مئات الخريجين الذين غيروا مسارهم المهني
               </p>
               <button
@@ -125,7 +125,7 @@ export function SocialProofSection() {
                 }}
                 className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                سجل الآن - ضمان 14 يوم
+                سجل الآن - ضمان 7 أيام
               </button>
             </div>
           </div>

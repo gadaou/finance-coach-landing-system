@@ -141,17 +141,17 @@ export function InstructorSection() {
                   لماذا تتعلم معنا؟
                 </div>
 
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-balance">
                   لأنك ستتعلم من{" "}
                   <span className="text-primary">الأفضل</span>
                 </h2>
 
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
                   مدربونا ليسوا فقط حاصلين على FMVA، بل هم{" "}
-                  <span className="text-primary font-semibold">Double Certified</span> (CFA + CMA/FMVA) ويعملون كمدراء ماليين في كبرى الشركات.
+                  <span className="text-primary font-semibold">Certified</span> (CFA + CMA/FMVA) ويعملون كمدراء ماليين في كبرى الشركات.
                 </p>
 
-                <p className="text-base md:text-lg text-foreground font-medium">
+                <p className="text-sm md:text-lg text-foreground font-medium">
                   أنت لا تدرس منهجاً، أنت تدرس{" "}
                   <span className="text-primary">خبرة سنين</span>
                 </p>

@@ -15,10 +15,10 @@ export function AudienceFilterSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-12" dir="rtl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               <span className="text-primary">لمن</span> هذا الكورس؟
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               نحدد بوضوح لمن هذا البرنامج ومن يجب أن يفكر مرتين قبل التسجيل
             </p>
           </div>
@@ -34,7 +34,7 @@ export function AudienceFilterSection() {
                   <div className="p-3 rounded-xl bg-primary/10 text-primary">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold">هذا الكورس مناسب لك إذا:</h3>
+                  <h3 className="text-xl md:text-2xl font-bold">هذا الكورس مناسب لك إذا:</h3>
                 </div>
 
                 <ul className="space-y-4">
@@ -64,7 +64,7 @@ export function AudienceFilterSection() {
                   <div className="p-3 rounded-xl bg-orange-500/10 text-orange-500">
                     <AlertTriangle className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold">تنبيه مهم:</h3>
+                  <h3 className="text-xl md:text-2xl font-bold">تنبيه مهم:</h3>
                 </div>
 
                 <div className="p-4 rounded-xl bg-orange-500/5 border border-orange-500/20">

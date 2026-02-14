@@ -18,7 +18,7 @@ export function CurriculumSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal animation="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16 -mt-8" dir="rtl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
               المنهج <span className="text-primary">"الجاهز للمكتب"</span>
             </h2>
           </div>
@@ -79,7 +79,7 @@ export function CurriculumSection() {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative p-3 sm:p-6 rounded-2xl bg-card border border-border shadow-xl">
-                  <h3 className="text-xl font-extrabold mb-2 sm:mb-4 text-center" dir="rtl">
+                  <h3 className="text-base sm:text-xl font-extrabold mb-2 sm:mb-4 text-center" dir="rtl">
                     تطور المهارات
                   </h3>
                   <SkillProgressionChart />
@@ -90,8 +90,8 @@ export function CurriculumSection() {
             <ScrollReveal animation="slide-in-left">
               <div className="relative group -mb-12 md:mb-0">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                <div className="relative p-6 rounded-2xl bg-card border border-border shadow-xl">
-                  <h3 className="text-xl font-bold mb-4 text-center" dir="rtl">
+                <div className="relative p-6 rounded-2xl bg-card border border-border shadow-xl" dir="rtl">
+                  <h3 className="text-base sm:text-xl font-bold mb-4 text-center">
                     التقدم خلال البرنامج
                   </h3>
                   <TimelineProgressChart />
@@ -166,7 +166,7 @@ function CurriculumModule({
                         <Calendar className="h-5 w-5 text-primary" />
                         <span className="text-sm font-semibold text-primary">{module.weeks}</span>
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-bold">{module.title}</h3>
+                      <h3 className="text-xl md:text-3xl font-bold">{module.title}</h3>
                     </div>
                   </div>
                   <ChevronDown 
@@ -186,10 +186,6 @@ function CurriculumModule({
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-lg flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    النتائج المتوقعة:
-                  </h4>
                   <ul className="space-y-2">
                     {module.outcomes.map((outcome, i) => (
                       <li

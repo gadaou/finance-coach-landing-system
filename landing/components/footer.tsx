@@ -2,37 +2,8 @@
 
 import Image from "next/image"
 import { Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useState } from "react"
 
 export function Footer() {
-  const [email, setEmail] = useState("")
-
-  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    
-    // Create FormData from the form
-    const formDataToSubmit = new FormData(e.currentTarget)
-    
-    try {
-      // Submit to FormSubmit
-      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
-        method: "POST",
-        body: formDataToSubmit,
-      })
-      
-      if (response.ok) {
-        setEmail("")
-        // You can add a success message here if needed
-      }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      // Clear email even on error for better UX
-      setEmail("")
-    }
-  }
-
   return (
     <footer className="bg-secondary text-secondary-foreground overflow-visible">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4">
@@ -40,7 +11,7 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8 overflow-visible">
           {/* Left Column - Services */}
           <div className="overflow-visible">
-            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Services</h3>
+            <h3 className="font-bold text-sm md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Services</h3>
             <ul className="space-y-1.5 md:space-y-2 text-sm">
               <li>
                 <a href="#why-acca" className="hover:text-primary transition-colors">
@@ -67,7 +38,7 @@ export function Footer() {
 
           {/* Middle Column - Resources */}
           <div className="overflow-visible">
-            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Resources</h3>
+            <h3 className="font-bold text-sm md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Resources</h3>
             <ul className="space-y-1.5 md:space-y-2 text-sm">
               <li>
                 <a href="#enroll" className="hover:text-primary transition-colors">
@@ -92,45 +63,13 @@ export function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Right Column - Join Our Community */}
-          <div className="overflow-visible">
-            <h3 className="font-bold text-base md:text-lg mb-2 md:mb-3 uppercase tracking-wider">Join Our Community</h3>
-            <p className="text-xs md:text-sm text-secondary-foreground/80 mb-2 md:mb-3">
-              Subscribe for exclusive ACCA insights and special offers
-            </p>
-            <form 
-              action="https://formsubmit.co/info@financecoach.co" 
-              method="POST"
-              onSubmit={handleSubscribe} 
-              className="space-y-2"
-            >
-              <input type="hidden" name="_subject" value="Newsletter Subscription" />
-              <input type="hidden" name="_captcha" value="false" />
-              <Input
-                type="email"
-                name="email"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-background/10 border-secondary-foreground/20 text-foreground placeholder:text-secondary-foreground/60 h-11"
-              />
-              <Button
-                type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-11"
-              >
-                Subscribe
-              </Button>
-            </form>
-          </div>
         </div>
 
         {/* Bottom Section */}
         <div className="border-t border-secondary-foreground/20 pt-4 md:pt-6 relative min-h-[80px] md:min-h-[100px]">
           {/* Large faded brand name in center */}
           <div className="absolute inset-0 flex items-start md:items-center justify-center pointer-events-none overflow-hidden pt-4 md:pt-0">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-secondary-foreground/5 select-none whitespace-nowrap">
+            <h2 className="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-secondary-foreground/5 select-none whitespace-nowrap">
               FINANCE COACH
             </h2>
           </div>
