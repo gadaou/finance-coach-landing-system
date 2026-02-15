@@ -4,7 +4,15 @@ import { useEffect, useRef, type ReactNode } from "react"
 
 interface ScrollRevealProps {
   children: ReactNode
-  animation?: "fade-in-up" | "fade-in" | "scale-in" | "slide-in-left" | "slide-in-right"
+  animation?:
+    | "fade-in-up"
+    | "fade-in"
+    | "scale-in"
+    | "slide-in-left"
+    | "slide-in-right"
+    | "reveal-line"
+    | "slide-up-subtle"
+    | "scale-in-subtle"
   delay?: number
 }
 

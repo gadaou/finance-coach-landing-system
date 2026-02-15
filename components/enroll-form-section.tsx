@@ -9,9 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { CheckCircle2 } from "lucide-react"
+import { submitToApi } from "@/lib/submit-form"
+import { trackThankYouView } from "@/lib/analytics"
+
+const LANDING_SLUG = "acca"
 
 export function EnrollFormSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,11 +24,23 @@ export function EnrollFormSection() {
     learningMode: "online",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Form submitted:", formData)
-    setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 5000)
+    setError("")
+    const { name, email, phone, learningMode } = formData
+    try {
+      const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone, learningMode })
+      if (result.ok) {
+        trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
+        setIsSubmitted(true)
+        setFormData({ name: "", email: "", phone: "", learningMode: "online" })
+        setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        setError(result.error ?? "Submission failed. Please try again.")
+      }
+    } catch {
+      setError("Something went wrong. Please try again.")
+    }
   }
 
   const handleChange = (field: string, value: string) => {
@@ -125,6 +142,9 @@ export function EnrollFormSection() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-sm text-destructive font-medium">{error}</p>
+                    )}
                     <div className="space-y-3">
                       <Label>Preferred Learning Mode *</Label>
                       <RadioGroup

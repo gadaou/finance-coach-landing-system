@@ -38,8 +38,8 @@ export function InstructorSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Video Section */}
-            <ScrollReveal animation="slide-in-right">
+            {/* VSL Video Section - Corporate Climber */}
+            <ScrollReveal animation="slide-up-subtle">
               <div className="relative group">
                 <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/20 shadow-2xl">
                   {/* Video element */}
@@ -133,27 +133,25 @@ export function InstructorSection() {
               </div>
             </ScrollReveal>
 
-            {/* Content Section */}
-            <ScrollReveal animation="slide-in-left">
+            {/* Content Section - Corporate Climber */}
+            <ScrollReveal animation="slide-up-subtle">
               <div className="space-y-6" dir="rtl">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary w-fit">
                   <Award className="h-4 w-4" />
-                  لماذا تتعلم معنا؟
+                  سلاح المحترفين
                 </div>
 
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-balance">
-                  لأنك ستتعلم من{" "}
-                  <span className="text-primary">الأفضل</span>
+                  من التقارير إلى{" "}
+                  <span className="text-primary">مقعد اتخاذ القرار</span>
                 </h2>
 
                 <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                  مدربونا ليسوا فقط حاصلين على FMVA، بل هم{" "}
-                  <span className="text-primary font-semibold">Certified</span> (CFA + CMA/FMVA) ويعملون كمدراء ماليين في كبرى الشركات.
+                  شاهد كيف ينتقل المحترفون من إعداد التقارير (Reporting) إلى صنع القرار (Decision Making) عبر النمذجة المالية المتقدمة.
                 </p>
 
                 <p className="text-sm md:text-lg text-foreground font-medium">
-                  أنت لا تدرس منهجاً، أنت تدرس{" "}
-                  <span className="text-primary">خبرة سنين</span>
+                  مدربون معتمدون (CFA + FMVA) — خبرة من كبرى الشركات
                 </p>
 
                 {/* Credentials */}

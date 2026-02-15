@@ -6,9 +6,14 @@ import { Input } from "@landing/components/ui/input"
 import { Label } from "@landing/components/ui/label"
 import { CheckCircle2, ArrowRight, Shield } from "lucide-react"
 import { useState } from "react"
+import { submitToApi } from "@/lib/submit-form"
+import { trackThankYouView } from "@/lib/analytics"
+
+const LANDING_SLUG = "fmva5"
 
 export function EnrollSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,29 +22,20 @@ export function EnrollSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    // Create FormData from the form
-    const formDataToSubmit = new FormData(e.currentTarget)
-    
+    setError("")
+    const { name, email, phone } = formData
     try {
-      // Submit to FormSubmit
-      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
-        method: "POST",
-        body: formDataToSubmit,
-      })
-      
-      if (response.ok) {
+      const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone })
+      if (result.ok) {
+        trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
         setIsSubmitted(true)
-        // Reset form
         setFormData({ name: "", email: "", phone: "" })
         setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        setError(result.error ?? "فشل الإرسال. يرجى المحاولة مرة أخرى.")
       }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      // Still show success message for better UX
-      setIsSubmitted(true)
-      setFormData({ name: "", email: "", phone: "" })
-      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch {
+      setError("حدث خطأ. يرجى المحاولة مرة أخرى.")
     }
   }
 
@@ -48,47 +44,43 @@ export function EnrollSection() {
   }
 
   return (
-    <section id="enroll" className="py-12 md:py-24 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
-      {/* Background decoration */}
+    <section id="enroll" className="py-10 md:py-14 bg-gradient-to-br from-primary/10 via-background to-primary/5 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal animation="fade-in-up">
-            <div className="text-center mb-6 md:mb-12" dir="rtl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
-                <Shield className="h-4 w-4" />
-                ابدأ رحلتك الآن
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal animation="reveal-line">
+            <div className="text-center mb-4 md:mb-8" dir="rtl">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs md:text-sm font-medium text-primary mb-3 md:mb-4">
+                <Shield className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                سلاح المحترفين
               </div>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
-                سجل في برنامج <span className="text-primary">FMVA</span> الآن
+              <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-balance">
+                احجز مكانك في الراوند القادمة — <span className="text-primary">الأماكن محدودة</span>
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-                احجز استشارتك المجانية وابدأ رحلتك نحو التحليل المالي المتقدم
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+                أتقن النمذجة المالية المتقدمة وانتقل من التقارير إلى صنع القرار
               </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid lg:grid-cols-2 gap-4 md:gap-12 items-start">
-            {/* Benefits */}
-            <ScrollReveal animation="slide-in-right">
-              <div className="space-y-4 md:space-y-6" dir="rtl">
-                <div className="p-4 md:p-8 rounded-xl md:rounded-2xl bg-card border-2 border-primary/20 shadow-xl">
-                  <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">ما ستحصل عليه:</h3>
-                  <ul className="space-y-2 md:space-y-4">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
+            <ScrollReveal animation="slide-up-subtle">
+              <div className="space-y-3 md:space-y-4" dir="rtl">
+                <div className="p-4 md:p-6 rounded-xl bg-card border-2 border-primary/20 shadow-lg">
+                  <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4">ما ستحصل عليه:</h3>
+                  <ul className="space-y-2 md:space-y-3">
                     {[
-                      "برنامج تدريبي متكامل جاهز للمكتب",
-                      "مدربون معتمدون Certified",
-                      "دعم مستمر أثناء وبعد البرنامج",
-                      "إعداد كامل لمقابلات Big 4",
-                      "شهادة معتمدة في FMVA",
+                      "الانتقال من إعداد التقارير (Reporting) إلى صنع القرار (Decision Making)",
+                      "تقنيات متقدمة في Excel لا يعرفها 90% من المحاسبين (Macros, Sensitivity Analysis)",
+                      "شهادة دولية تعزز طلبك للترقية أو الانتقال لشركة Multinational",
                     ].map((item, index) => (
                       <li
                         key={index}
-                        className="flex items-start gap-2 md:gap-3 p-2 md:p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all"
+                        className="flex items-start gap-2 p-2 md:p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all"
                         style={{
                           animation: `fadeInUp 0.5s ease-out ${index * 100}ms both`,
                         }}
@@ -100,23 +92,26 @@ export function EnrollSection() {
                   </ul>
                 </div>
 
-                <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Shield className="h-6 w-6 text-primary" />
-                    <span className="font-semibold text-base md:text-lg">ضمان 7 أيام</span>
+                <div className="p-4 md:p-5 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="h-5 w-5 text-primary" />
+                    <span className="font-semibold text-sm md:text-base">ضمان 7 أيام</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs md:text-sm text-muted-foreground mb-2">
                     إذا لم تكن راضياً عن البرنامج خلال أول 7 أيام، سنعيد لك أموالك بالكامل بدون أي أسئلة.
+                  </p>
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    متاح أونلاين بجودة تفاعلية عالية (Live) أو مسجل بالكامل ليناسب جدول عملك المزدحم.
                   </p>
                 </div>
               </div>
             </ScrollReveal>
 
             {/* Form */}
-            <ScrollReveal animation="slide-in-left">
+            <ScrollReveal animation="scale-in-subtle">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                <div className="relative p-8 md:p-10 rounded-2xl bg-card border-2 border-primary/20 shadow-2xl" dir="rtl">
+                <div className="relative p-5 md:p-8 rounded-xl md:rounded-2xl bg-card border-2 border-primary/20 shadow-xl" dir="rtl">
                   {isSubmitted ? (
                     <div className="text-center py-12">
                       <div className="inline-flex p-4 rounded-full bg-primary/10 text-primary mb-6">
@@ -145,7 +140,7 @@ export function EnrollSection() {
                           value={formData.name}
                           onChange={(e) => handleChange("name", e.target.value)}
                           placeholder="أدخل اسمك الكامل"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="h-11 md:h-12 min-h-[44px] focus:ring-2 focus:ring-primary focus:border-primary text-right"
                           dir="rtl"
                         />
                       </div>
@@ -160,11 +155,14 @@ export function EnrollSection() {
                           value={formData.email}
                           onChange={(e) => handleChange("email", e.target.value)}
                           placeholder="example@email.com"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="h-11 md:h-12 min-h-[44px] focus:ring-2 focus:ring-primary focus:border-primary text-right"
                           dir="rtl"
                         />
                       </div>
 
+                      {error && (
+                        <p className="text-sm text-destructive font-medium text-right">{error}</p>
+                      )}
                       <div className="space-y-2">
                         <Label htmlFor="phone" className="text-right">رقم الهاتف</Label>
                         <Input
@@ -175,7 +173,7 @@ export function EnrollSection() {
                           value={formData.phone}
                           onChange={(e) => handleChange("phone", e.target.value)}
                           placeholder="+20 XXX XXX XXXX"
-                          className="h-12 focus:ring-2 focus:ring-primary focus:border-primary text-right"
+                          className="h-11 md:h-12 min-h-[44px] focus:ring-2 focus:ring-primary focus:border-primary text-right"
                           dir="rtl"
                         />
                       </div>
@@ -183,10 +181,10 @@ export function EnrollSection() {
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] text-lg font-semibold group"
+                        className="w-full min-h-[44px] h-12 md:h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] text-base md:text-lg font-semibold group"
                       >
                         <span className="flex items-center justify-center gap-2">
-                          سجل الآن - ضمان 7 أيام
+                          احجز مكانك في الراوند القادمة — الأماكن محدودة
                           <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                       </Button>

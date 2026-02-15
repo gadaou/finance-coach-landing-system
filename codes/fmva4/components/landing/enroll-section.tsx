@@ -7,9 +7,14 @@ import { Label } from "@fmva4/components/ui/label"
 import { LuxuryIcon } from "@fmva4/components/ui/luxury-icon"
 import { CheckCircle2, ArrowRight, Shield } from "lucide-react"
 import { useState } from "react"
+import { submitToApi } from "@/lib/submit-form"
+import { trackThankYouView } from "@/lib/analytics"
+
+const LANDING_SLUG = "fmva4"
 
 export function EnrollSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,29 +23,20 @@ export function EnrollSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    
-    // Create FormData from the form
-    const formDataToSubmit = new FormData(e.currentTarget)
-    
+    setError("")
+    const { name, email, phone } = formData
     try {
-      // Submit to FormSubmit
-      const response = await fetch("https://formsubmit.co/info@financecoach.co", {
-        method: "POST",
-        body: formDataToSubmit,
-      })
-      
-      if (response.ok) {
+      const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone })
+      if (result.ok) {
+        trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
         setIsSubmitted(true)
-        // Reset form
         setFormData({ name: "", email: "", phone: "" })
         setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        setError(result.error ?? "فشل الإرسال. يرجى المحاولة مرة أخرى.")
       }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      // Still show success message for better UX
-      setIsSubmitted(true)
-      setFormData({ name: "", email: "", phone: "" })
-      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch {
+      setError("حدث خطأ. يرجى المحاولة مرة أخرى.")
     }
   }
 
@@ -168,6 +164,9 @@ export function EnrollSection() {
                         />
                       </div>
 
+                      {error && (
+                        <p className="text-sm text-destructive font-medium text-right">{error}</p>
+                      )}
                       <div className="space-y-1.5 sm:space-y-2">
                         <Label htmlFor="phone" className="text-right text-sm sm:text-base">رقم الهاتف</Label>
                         <Input

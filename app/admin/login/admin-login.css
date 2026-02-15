@@ -1,0 +1,90 @@
+/* Login page: green brand, fancy card */
+.admin-login-page {
+  --admin-green: 142 71% 45%;
+  --admin-green-light: 142 40% 96%;
+  --admin-green-border: 142 50% 85%;
+}
+
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, hsl(0 0% 97%) 0%, hsl(142 30% 96%) 50%, hsl(142 25% 97%) 100%);
+  padding: 1.5rem;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 24rem;
+  padding: 2rem 2.25rem;
+  background: white;
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.admin-login-card h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(142 71% 28%);
+  margin-bottom: 0.25rem;
+}
+
+.admin-login-card .subtitle {
+  font-size: 0.875rem;
+  color: hsl(0 0% 45%);
+  margin-bottom: 1.75rem;
+}
+
+.admin-login-card label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(0 0% 25%);
+  margin-bottom: 0.5rem;
+}
+
+.admin-login-card input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid hsl(142 20% 88%);
+  border-radius: 0.5rem;
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-login-card input[type="password"]:focus {
+  outline: none;
+  border-color: hsl(var(--admin-green));
+  box-shadow: 0 0 0 3px hsl(142 71% 45% / 0.2);
+}
+
+.admin-login-card .btn-signin {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: hsl(142 71% 45%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-login-card .btn-signin:hover {
+  background: hsl(142 71% 38%);
+}
+
+.admin-login-card .btn-signin:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.admin-login-card .error {
+  font-size: 0.875rem;
+  color: hsl(0 72% 45%);
+  margin-top: 0.75rem;
+}

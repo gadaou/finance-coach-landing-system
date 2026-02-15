@@ -7,10 +7,9 @@ import { useState } from "react"
 
 export function SocialProofSection() {
   const companies = [
-    { name: "CIB", logo: "/logos/cib.png" },
-    { name: "HSBC", logo: "/logos/hsbc.png" },
-    { name: "Deloitte", logo: "/logos/deloitte.png" },
-    { name: "KPMG", logo: "/logos/kpmg.png" },
+    { name: "بنك مصر", logo: "/logos/cib.png" },
+    { name: "بايونيرز", logo: "/logos/deloitte.png" },
+    { name: "اتصالات", logo: "/logos/kpmg.png" },
   ]
 
   return (
@@ -23,24 +22,24 @@ export function SocialProofSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Company Logos Section */}
-        <ScrollReveal animation="fade-in-up">
+        <ScrollReveal animation="reveal-line">
           <div className="text-center max-w-3xl mx-auto mb-16" dir="rtl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium text-primary mb-6">
               <Building2 className="h-4 w-4" />
-              خريجونا يعملون هنا
+              انضم لنخبة من
             </div>
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">
-              شركات <span className="text-primary">عالمية</span> تثق بنا
+              <span className="text-primary">بنك مصر، بايونيرز، واتصالات</span>
             </h2>
             <p className="text-base md:text-lg text-muted-foreground">
-              انضم إلى مئات الخريجين الذين يعملون في أكبر الشركات المالية
+              خريجونا يعملون في كبرى الشركات — انطلق من المحاسبة إلى مقعد اتخاذ القرار
             </p>
           </div>
         </ScrollReveal>
 
         {/* Company Logos Grid */}
         <div className="max-w-5xl mx-auto mb-6 md:mb-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {companies.map((company, index) => (
               <CompanyLogo key={index} company={company} index={index} />
             ))}
@@ -76,10 +75,10 @@ export function SocialProofSection() {
           <div className="mt-8 md:mt-16 text-center">
             <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20" dir="rtl">
               <h3 className="text-xl md:text-3xl font-bold mb-4">
-                هل أنت جاهز لبدء رحلتك؟
+                احجز مكانك في الراوند القادمة
               </h3>
               <p className="text-base md:text-lg text-muted-foreground mb-6">
-                انضم إلى مئات الخريجين الذين غيروا مسارهم المهني
+                الأماكن محدودة — انتقل من المحاسبة الروتينية إلى مقعد اتخاذ القرار
               </p>
               <button
                 onClick={() => {
@@ -88,9 +87,9 @@ export function SocialProofSection() {
                     element.scrollIntoView({ behavior: "smooth" })
                   }
                 }}
-                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
               >
-                سجل الآن - ضمان 7 أيام
+                احجز مكانك في الراوند القادمة — الأماكن محدودة
               </button>
             </div>
           </div>
@@ -110,7 +109,7 @@ function CompanyLogo({
   const [imageError, setImageError] = useState(false)
 
   return (
-    <ScrollReveal animation="scale-in" delay={index * 100}>
+    <ScrollReveal animation="scale-in-subtle" delay={index * 100}>
       <div className="group relative">
         <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl flex items-center justify-center h-32">
