@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
+import { AnalyticsConnector } from "@/components/analytics-connector"
 import { AnalyticsPageView } from "@/components/analytics-page-view"
 import "./globals.css"
 
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={`${notoSansArabic.variable} font-sans antialiased`}>
+        <AnalyticsConnector />
         {children}
         <AnalyticsPageView />
         <Analytics />

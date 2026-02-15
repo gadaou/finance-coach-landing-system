@@ -14,7 +14,7 @@
 }
 
 .admin-theme .admin-sidebar {
-  width: 14rem;
+  width: 12rem;
   border-right: 1px solid hsl(var(--admin-border));
   background: hsl(var(--admin-card));
   padding: 1.5rem;
@@ -23,11 +23,15 @@
   gap: 0.5rem;
 }
 
-.admin-theme .admin-sidebar h2 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: hsl(142 71% 28%);
-  margin-bottom: 1rem;
+.admin-theme .admin-sidebar-logo {
+  margin-bottom: 0.5rem;
+}
+.admin-theme .admin-sidebar-logo img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
 }
 
 .admin-theme .admin-sidebar a {

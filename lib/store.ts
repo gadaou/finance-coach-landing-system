@@ -30,7 +30,7 @@ type Store = {
 }
 
 const DEFAULT_LANDINGS: Landing[] = [
-  { id: "home", slug: "home", name: "Home (Corporate Climber)", path: "/", created_at: new Date().toISOString() },
+  { id: "home", slug: "home", name: "Home", path: "/", created_at: new Date().toISOString() },
   { id: "fmva1", slug: "fmva1", name: "FMVA 1", path: "/fmva1", created_at: new Date().toISOString() },
   { id: "fmva3", slug: "fmva3", name: "FMVA 3", path: "/fmva3", created_at: new Date().toISOString() },
   { id: "fmva4", slug: "fmva4", name: "FMVA 4", path: "/fmva4", created_at: new Date().toISOString() },

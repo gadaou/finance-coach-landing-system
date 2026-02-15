@@ -16,7 +16,7 @@ export function AdminNav() {
         <Link
           key={href}
           href={href}
-          className={pathname === href || (href === "/admin/landings" && pathname?.startsWith("/admin/landings")) ? "admin-link-active" : ""}
+          className={pathname === href || (href === "/admin/landings" && pathname?.startsWith("/admin/landings")) || (href === "/admin/analytics" && pathname?.startsWith("/admin/analytics")) ? "admin-link-active" : ""}
         >
           {label}
         </Link>

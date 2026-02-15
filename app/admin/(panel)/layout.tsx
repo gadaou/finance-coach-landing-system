@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { redirect } from "next/navigation"
 import { isAdminAuthenticated } from "@/lib/admin-auth"
 import { LogoutButton } from "@/components/admin/logout-button"
@@ -15,7 +16,9 @@ export default async function AdminPanelLayout({
   return (
     <div dir="ltr" lang="en" className="admin-theme flex min-h-screen">
       <aside className="admin-sidebar flex flex-col">
-        <h2>Finance Coach</h2>
+        <div className="admin-sidebar-logo">
+          <Image src="/logo2.png" alt="" width={200} height={56} priority />
+        </div>
         <AdminNav />
         <div className="mt-auto pt-4">
           <LogoutButton />

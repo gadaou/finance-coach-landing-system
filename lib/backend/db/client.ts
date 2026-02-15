@@ -28,8 +28,16 @@ function createSqliteClient() {
       meta TEXT NOT NULL DEFAULT '{}',
       created_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS analytics_events (
+      id TEXT PRIMARY KEY,
+      type TEXT NOT NULL,
+      landing_id TEXT,
+      page_id TEXT,
+      error_message TEXT,
+      created_at TEXT NOT NULL
+    );
   `)
-  return { db: drizzle(sqlite, { schema }), landings: schema.landings, submissions: schema.submissions }
+  return { db: drizzle(sqlite, { schema }), landings: schema.landings, submissions: schema.submissions, analytics_events: schema.analytics_events }
 }
 
 function createPostgresClient() {
@@ -55,11 +63,21 @@ function createPostgresClient() {
       meta TEXT NOT NULL DEFAULT '{}',
       created_at TEXT NOT NULL
     );
+  `)).then(() => pool.query(`
+    CREATE TABLE IF NOT EXISTS analytics_events (
+      id TEXT PRIMARY KEY,
+      type TEXT NOT NULL,
+      landing_id TEXT REFERENCES landings(id),
+      page_id TEXT,
+      error_message TEXT,
+      created_at TEXT NOT NULL
+    );
   `)).catch((err: Error) => console.error("[db] Postgres ensure tables failed:", err))
   return {
     db: drizzle(pool, { schema: schemaPg }),
     landings: schemaPg.landings,
     submissions: schemaPg.submissions,
+    analytics_events: schemaPg.analytics_events,
   }
 }
 
@@ -68,3 +86,4 @@ const client = hasPostgres ? createPostgresClient() : createSqliteClient()
 export const db = client.db
 export const landings = client.landings
 export const submissions = client.submissions
+export const analytics_events = client.analytics_events
