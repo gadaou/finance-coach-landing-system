@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@landing/components/ui/chart"
 
 // Skill Progression Chart
 export function SkillProgressionChart() {

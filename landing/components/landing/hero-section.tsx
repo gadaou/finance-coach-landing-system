@@ -1,8 +1,8 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@landing/components/ui/button"
 import { ArrowRight, CheckCircle2, TrendingUp, Award, Briefcase } from "lucide-react"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@landing/components/scroll-reveal"
 import { useEffect, useState, useRef } from "react"
 
 export function HeroSection() {

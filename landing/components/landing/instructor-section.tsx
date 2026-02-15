@@ -1,6 +1,6 @@
 "use client"
 
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@landing/components/scroll-reveal"
 import { Play, Award, CheckCircle2, TrendingUp, Loader2 } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button } from "@landing/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 export function Navbar() {

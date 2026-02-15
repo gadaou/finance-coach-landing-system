@@ -1,6 +1,6 @@
 "use client"
 
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@landing/components/scroll-reveal"
 import { CheckCircle2, XCircle, GraduationCap, Briefcase, AlertTriangle } from "lucide-react"
 
 export function AudienceFilterSection() {

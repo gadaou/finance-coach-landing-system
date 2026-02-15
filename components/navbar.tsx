@@ -44,7 +44,7 @@ export function Navbar() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all"
             >
-              سجل الآن
+              احجز مكانك
             </Button>
           </div>
 
@@ -54,9 +54,9 @@ export function Navbar() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-border bg-white rounded-b-2xl">
-            <Button onClick={() => scrollToSection("enroll")} className="w-full bg-primary hover:bg-primary/90">
-              سجل الآن
+          <div className="md:hidden py-4 space-y-4 border-t border-border bg-background/98 backdrop-blur rounded-b-2xl">
+            <Button onClick={() => scrollToSection("enroll")} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+              احجز مكانك
             </Button>
           </div>
         )}

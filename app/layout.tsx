@@ -16,11 +16,11 @@ const notoSansArabic = localFont({
   display: "swap",
 })
 
-// FMVA Certification Hunter landing page
+// Corporate Climber landing - للموظفين: من المحاسبة الروتينية إلى مقعد اتخاذ القرار
 export const metadata: Metadata = {
-  title: "FMVA التطبيقي | Finance Coach Academy",
+  title: "من المحاسبة إلى مقعد اتخاذ القرار | Finance Coach Academy",
   description:
-    "برنامج FMVA التطبيقي: حول معرفتك النظرية إلى خبرة عملية في النمذجة والتقييم المالي في 3 شهور. مدربون Double Certified - CFA + FMVA.",
+    "أتقن النمذجة المالية المتقدمة (Financial Modeling) وحوّل البيانات إلى استراتيجيات تقود شركتك وراتبك للأمام. انضم لنخبة بنك مصر، بايونيرز، واتصالات.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <body className={`${notoSansArabic.variable} font-sans antialiased`}>
         {children}
         <Analytics />

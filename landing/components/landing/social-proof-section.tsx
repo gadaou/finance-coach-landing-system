@@ -1,6 +1,6 @@
 "use client"
 
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@landing/components/scroll-reveal"
 import { Quote, Building2, Users } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"

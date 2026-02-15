@@ -1,6 +1,6 @@
 "use client"
 
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { ScrollReveal } from "@landing/components/scroll-reveal"
 import { MousePointerClick, Building2, TrendingUp, CheckCircle2, Calendar } from "lucide-react"
 import { SkillProgressionChart, TimelineProgressChart } from "./animated-charts"
 import { useEffect, useState, useRef } from "react"
