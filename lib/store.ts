@@ -35,6 +35,7 @@ const DEFAULT_LANDINGS: Landing[] = [
   { id: "fmva3", slug: "fmva3", name: "FMVA 3", path: "/fmva3", created_at: new Date().toISOString() },
   { id: "fmva4", slug: "fmva4", name: "FMVA 4", path: "/fmva4", created_at: new Date().toISOString() },
   { id: "fmva5", slug: "fmva5", name: "FMVA 5", path: "/fmva5", created_at: new Date().toISOString() },
+  { id: "fmva6", slug: "fmva6", name: "FMVA 6", path: "/fmva6", created_at: new Date().toISOString() },
 ]
 
 function getDataPath(): string {

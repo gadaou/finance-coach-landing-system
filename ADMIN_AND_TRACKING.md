@@ -9,6 +9,7 @@
 | `/fmva3` | fmva3  | `codes/fmva3/`        |
 | `/fmva4` | fmva4  | `codes/fmva4/`        |
 | `/fmva5` | fmva5  | `landing/`            |
+| `/fmva6` | fmva6  | `landing/`            |
 
 ## Admin panel
 

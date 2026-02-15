@@ -1,0 +1,124 @@
+/* FMVA6: Brand Green + Black (Dark Mode) - The Skill Master / المختبر العملي */
+
+:root {
+  --background: oklch(0.12 0.01 145);
+  --foreground: oklch(0.98 0.005 120);
+  --card: oklch(0.16 0.012 145);
+  --card-foreground: oklch(0.98 0.005 120);
+  --popover: oklch(0.16 0.012 145);
+  --popover-foreground: oklch(0.98 0.005 120);
+  /* Brand main green (same as globals) */
+  --primary: oklch(0.58 0.15 140);
+  --primary-foreground: oklch(0.15 0.02 120);
+  --secondary: oklch(0.22 0.015 145);
+  --secondary-foreground: oklch(0.98 0.005 120);
+  --muted: oklch(0.24 0.01 145);
+  --muted-foreground: oklch(0.98 0.005 120);
+  --accent: oklch(0.28 0.06 140);
+  --accent-foreground: oklch(0.98 0.005 120);
+  --border: oklch(0.28 0.015 145);
+  --input: oklch(0.28 0.015 145);
+  --ring: oklch(0.58 0.15 140);
+  --chart-1: oklch(0.58 0.15 140);
+  --chart-2: oklch(0.35 0.02 145);
+  --chart-3: oklch(0.65 0.15 140);
+  --chart-4: oklch(0.5 0.12 140);
+  --chart-5: oklch(0.6 0.11 148);
+}
+
+.dark {
+  --background: oklch(0.12 0.01 145);
+  --foreground: oklch(0.98 0.005 120);
+  --card: oklch(0.16 0.012 145);
+  --card-foreground: oklch(0.98 0.005 120);
+  --popover: oklch(0.16 0.012 145);
+  --popover-foreground: oklch(0.98 0.005 120);
+  --primary: oklch(0.65 0.15 140);
+  --primary-foreground: oklch(0.15 0.02 120);
+  --secondary: oklch(0.22 0.015 145);
+  --secondary-foreground: oklch(0.98 0.005 120);
+  --muted: oklch(0.24 0.01 145);
+  --muted-foreground: oklch(0.98 0.005 120);
+  --accent: oklch(0.28 0.06 140);
+  --accent-foreground: oklch(0.98 0.005 120);
+  --border: oklch(0.28 0.015 145);
+  --input: oklch(0.28 0.015 145);
+  --ring: oklch(0.65 0.15 140);
+  --chart-1: oklch(0.65 0.15 140);
+  --chart-2: oklch(0.35 0.02 145);
+  --chart-3: oklch(0.65 0.15 140);
+  --chart-4: oklch(0.5 0.12 140);
+  --chart-5: oklch(0.6 0.11 148);
+}
+
+/* FMVA6 ScrollReveal animations */
+@keyframes reveal-line {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up-subtle {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in-subtle {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-reveal-line {
+  animation: reveal-line 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-up-subtle {
+  animation: slide-up-subtle 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-scale-in-subtle {
+  animation: scale-in-subtle 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
