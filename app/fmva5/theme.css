@@ -95,3 +95,28 @@
 .animate-scale-in-subtle {
   animation: scale-in-subtle 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+/* Luxury: progress fill (use with [data-in-view]) */
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-progress-fill {
+  transform-origin: right;
+  animation: progress-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Donut segment reveal */
+@keyframes donut-reveal {
+  from {
+    stroke-dashoffset: 283;
+  }
+  to {
+    stroke-dashoffset: var(--donut-offset, 0);
+  }
+}

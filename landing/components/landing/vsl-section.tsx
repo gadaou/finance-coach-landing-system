@@ -23,8 +23,8 @@ export function VslSection() {
   }, [])
 
   return (
-    <section className="py-10 md:py-14 relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-2 sm:py-5 md:py-8 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-5 lg:px-6">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal animation="slide-up-subtle">
             <div className="relative group">

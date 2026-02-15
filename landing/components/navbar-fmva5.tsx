@@ -28,19 +28,19 @@ export function NavbarFmva5() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-foreground/95 backdrop-blur-lg shadow-sm" : "bg-foreground/80 backdrop-blur-sm"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-primary/30 ${
+        isScrolled ? "bg-secondary/95 backdrop-blur-lg shadow-sm" : "bg-secondary/90 backdrop-blur-sm"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 md:h-16">
+      <div className="container mx-auto px-4 sm:px-5 lg:px-6">
+        <div className="flex items-center justify-between h-12 md:h-14">
           <Link href="/" className="flex items-center shrink-0">
             <Image
               src="/logo2.png"
               alt="Finance Coach"
               width={160}
               height={52}
-              className="h-9 w-auto md:h-10 brightness-0 invert"
+              className="h-9 w-auto md:h-10"
             />
           </Link>
 
@@ -55,7 +55,7 @@ export function NavbarFmva5() {
           </div>
 
           <button
-            className="md:hidden p-2 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white"
+            className="md:hidden p-2 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -64,7 +64,7 @@ export function NavbarFmva5() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/20">
+          <div className="md:hidden py-4 border-t border-border">
             <Button
               onClick={() => scrollToSection("enroll")}
               className="w-full bg-primary hover:bg-primary/90 min-h-[44px]"
