@@ -1,9 +1,27 @@
 import { mkdirSync, existsSync } from "fs"
 import { join } from "path"
 
-const hasPostgres = Boolean(process.env.DATABASE_URL)
+type Client = {
+  db: Record<string, unknown>
+  landings: Record<string, unknown>
+  submissions: Record<string, unknown>
+  analytics_events: Record<string, unknown>
+}
 
-function createSqliteClient() {
+let client: Client | null = null
+
+function getClient(): Client {
+  if (client) return client
+  const hasPostgres = Boolean(process.env.DATABASE_URL)
+  if (hasPostgres) {
+    client = createPostgresClient()
+  } else {
+    client = createSqliteClient()
+  }
+  return client
+}
+
+function createSqliteClient(): Client {
   const { drizzle } = require("drizzle-orm/better-sqlite3")
   const Database = require("better-sqlite3")
   const schema = require("./schema")
@@ -40,7 +58,7 @@ function createSqliteClient() {
   return { db: drizzle(sqlite, { schema }), landings: schema.landings, submissions: schema.submissions, analytics_events: schema.analytics_events }
 }
 
-function createPostgresClient() {
+function createPostgresClient(): Client {
   const { drizzle } = require("drizzle-orm/node-postgres")
   const { Pool } = require("pg")
   const schemaPg = require("./schema-pg")
@@ -81,9 +99,17 @@ function createPostgresClient() {
   }
 }
 
-const client = hasPostgres ? createPostgresClient() : createSqliteClient()
+// Lazy proxies: avoid loading better-sqlite3 at build time (e.g. on Vercel).
+// Client is created on first use; set DATABASE_URL on Vercel to use Postgres.
+function lazy<T extends Record<string, unknown>>(key: keyof Client): T {
+  return new Proxy({} as T, {
+    get(_, prop) {
+      return (getClient()[key] as T)[prop as keyof T]
+    },
+  })
+}
 
-export const db = client.db
-export const landings = client.landings
-export const submissions = client.submissions
-export const analytics_events = client.analytics_events
+export const db = lazy<Client["db"]>("db")
+export const landings = lazy<Client["landings"]>("landings")
+export const submissions = lazy<Client["submissions"]>("submissions")
+export const analytics_events = lazy<Client["analytics_events"]>("analytics_events")
