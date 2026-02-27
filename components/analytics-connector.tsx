@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { getApiOrigin } from "@/lib/api"
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
@@ -16,7 +17,7 @@ declare global {
 
 function sendToServer(payload: { type: string; pageId?: string; landing?: string; error?: string }) {
   try {
-    fetch("/api/analytics/event", {
+    fetch(`${getApiOrigin()}/api/analytics/event`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

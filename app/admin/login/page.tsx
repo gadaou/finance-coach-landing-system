@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { getApiOrigin } from "@/lib/api"
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState("")
@@ -14,7 +15,7 @@ export default function AdminLoginPage() {
     setError("")
     setLoading(true)
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch(`${getApiOrigin()}/api/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),

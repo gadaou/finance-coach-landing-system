@@ -3,6 +3,7 @@
  * Optional: set FORMSUBMIT_FORWARD=true and form will still be sent to FormSubmit after our API stores it.
  */
 
+import { getApiOrigin } from "@/lib/api"
 import { trackFormSubmission, trackFormSubmissionError } from "@/lib/analytics"
 
 export type SubmitPayload = {
@@ -21,7 +22,7 @@ function getPageId(): string | undefined {
 export async function submitToApi(payload: SubmitPayload): Promise<{ ok: boolean; id?: string; error?: string }> {
   const pageId = getPageId()
   try {
-    const res = await fetch("/api/submit", {
+    const res = await fetch(`${getApiOrigin()}/api/submit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

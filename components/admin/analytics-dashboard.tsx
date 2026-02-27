@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts"
+import { getApiOrigin } from "@/lib/api"
 import { AnalyticsLandingSelector, type LandingSummaryItem } from "./analytics-landing-selector"
 import { BarChart3, FileInput, AlertCircle, CheckCircle2, ExternalLink } from "lucide-react"
 
@@ -40,9 +41,10 @@ export function AnalyticsDashboard() {
     let cancelled = false
     setLoading(true)
     const chartLandingParam = landingSlug ? `?landing=${encodeURIComponent(landingSlug)}` : ""
+    const origin = getApiOrigin()
     Promise.all([
-      fetch("/api/admin/analytics/summary").then((r) => r.json()),
-      fetch(`/api/admin/analytics/chart${chartLandingParam}`).then((r) => r.json()),
+      fetch(`${origin}/api/admin/analytics/summary`).then((r) => r.json()),
+      fetch(`${origin}/api/admin/analytics/chart${chartLandingParam}`).then((r) => r.json()),
     ])
       .then(([sum, ch]) => {
         if (!cancelled) {
