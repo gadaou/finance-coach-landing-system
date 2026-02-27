@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 const ADMIN_COOKIE = "admin_token"
 
 export function getAdminPassword(): string {
-  return process.env.ADMIN_PASSWORD ?? "admin"
+  return process.env.ADMIN_PASSWORD ?? "admin123"
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {
