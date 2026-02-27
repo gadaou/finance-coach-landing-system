@@ -95,8 +95,7 @@ export function EnrollFormSection() {
                     </div>
                     <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
                     <p className="text-muted-foreground">
-                      We've received your information. Our team will contact you within 24 hours to schedule your free
-                      consultation.
+                      Thank you. We will contact you soon.
                     </p>
                   </div>
                 ) : (

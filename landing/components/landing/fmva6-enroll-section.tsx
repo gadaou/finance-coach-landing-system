@@ -137,7 +137,7 @@ export function Fmva6EnrollSection() {
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold mb-3">شكراً لك!</h3>
                       <p className="text-muted-foreground">
-                        تم استلام معلوماتك. سيتواصل معك فريقنا خلال 24 ساعة.
+                        شكراً لك. سنتواصل معك قريباً.
                       </p>
                     </div>
                   ) : (

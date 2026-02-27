@@ -9,13 +9,23 @@ function escapeCsvCell(value: string): string {
   return s
 }
 
+function formatMetaSummary(meta: Record<string, unknown>): string {
+  if (!meta || Object.keys(meta).length === 0) return ""
+  return Object.entries(meta)
+    .map(([k, v]) => `${k}: ${typeof v === "object" ? JSON.stringify(v) : String(v)}`)
+    .join(", ")
+}
+
 function downloadCsv(submissions: Submission[]) {
-  const headers = ["Name", "Email", "Phone", "Date"]
+  const headers = ["Name", "Email", "Phone", "Date", "Meta"]
   const rows = submissions.map((s) => [
     escapeCsvCell(s.name),
     escapeCsvCell(s.email),
     escapeCsvCell(s.phone ?? ""),
     escapeCsvCell(new Date(s.created_at).toLocaleString()),
+    escapeCsvCell(
+      Object.keys(s.meta ?? {}).length > 0 ? JSON.stringify(s.meta) : ""
+    ),
   ])
   const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\r\n")
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" })
@@ -140,12 +150,13 @@ export function SubmissionsTable({
               <th className="text-left p-3 font-semibold text-[hsl(0,0%,30%)]">Email</th>
               <th className="text-left p-3 font-semibold text-[hsl(0,0%,30%)]">Phone</th>
               <th className="text-left p-3 font-semibold text-[hsl(0,0%,30%)]">Date</th>
+              <th className="text-left p-3 font-semibold text-[hsl(0,0%,30%)]">Meta</th>
             </tr>
           </thead>
           <tbody>
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={4} className="p-6 text-center text-[hsl(0,0%,50%)]">
+                <td colSpan={5} className="p-6 text-center text-[hsl(0,0%,50%)]">
                   No submissions match the filters.
                 </td>
               </tr>
@@ -156,6 +167,9 @@ export function SubmissionsTable({
                   <td className="p-3">{s.email}</td>
                   <td className="p-3">{s.phone || "—"}</td>
                   <td className="p-3 text-[hsl(0,0%,50%)]">{new Date(s.created_at).toLocaleString()}</td>
+                  <td className="p-3 text-[hsl(0,0%,45%)] max-w-[12rem] truncate" title={formatMetaSummary(s.meta)}>
+                    {formatMetaSummary(s.meta) || "—"}
+                  </td>
                 </tr>
               ))
             )}

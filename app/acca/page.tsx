@@ -8,6 +8,7 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { EnrollFormSection } from "@/components/enroll-form-section"
 import { FaqSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
+import { WhatsAppButton } from "@/components/whatsapp-button"
 
 export default function AccaPage() {
   return (
@@ -22,6 +23,7 @@ export default function AccaPage() {
       <EnrollFormSection />
       <FaqSection />
       <Footer />
+      <WhatsAppButton />
     </main>
   )
 }

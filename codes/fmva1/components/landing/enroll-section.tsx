@@ -120,7 +120,7 @@ export function EnrollSection() {
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold mb-4">شكراً لك!</h3>
                       <p className="text-muted-foreground">
-                        تم استلام معلوماتك. سيتواصل معك فريقنا خلال 24 ساعة لحجز استشارتك المجانية.
+                        شكراً لك. سنتواصل معك قريباً.
                       </p>
                     </div>
                   ) : (
