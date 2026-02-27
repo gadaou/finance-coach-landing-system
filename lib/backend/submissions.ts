@@ -1,5 +1,5 @@
 import { eq, desc } from "drizzle-orm"
-import { db, submissions as submissionsTable } from "./db/client"
+import { getDbClient, execQuery } from "./db/client"
 import { getLandingBySlug } from "./landings"
 
 export type Submission = {
@@ -23,26 +23,22 @@ type SubmissionRow = {
 }
 
 export async function getSubmissions(landingSlug?: string): Promise<Submission[]> {
+  const { db, submissions: submissionsTable } = await getDbClient()
   let rows: SubmissionRow[]
   if (landingSlug) {
     const landing = await getLandingBySlug(landingSlug)
     if (!landing) return []
-    const result = await Promise.resolve(
+    rows = await execQuery<SubmissionRow>(
       db
         .select()
         .from(submissionsTable)
         .where(eq(submissionsTable.landing_id, landing.id))
         .orderBy(desc(submissionsTable.created_at))
-        .all() as Promise<SubmissionRow[]> | SubmissionRow[]
     )
-    rows = Array.isArray(result) ? result : await result
   } else {
-    const result = await Promise.resolve(
-      db.select().from(submissionsTable).orderBy(desc(submissionsTable.created_at)).all() as
-        | Promise<SubmissionRow[]>
-        | SubmissionRow[]
+    rows = await execQuery<SubmissionRow>(
+      db.select().from(submissionsTable).orderBy(desc(submissionsTable.created_at))
     )
-    rows = Array.isArray(result) ? result : await result
   }
   return rows.map((r) => ({
     ...r,
@@ -54,6 +50,7 @@ export async function addSubmission(
   landingSlug: string,
   data: { name: string; email: string; phone?: string; [k: string]: unknown }
 ): Promise<Submission> {
+  const { db, submissions: submissionsTable } = await getDbClient()
   const landing = await getLandingBySlug(landingSlug)
   if (!landing) throw new Error("Unknown landing: " + landingSlug)
   const id = `sub_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`

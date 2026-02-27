@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm"
-import { db, landings as landingsTable } from "./db/client"
+import { getDbClient, execQuery } from "./db/client"
 
 export type Landing = {
   id: string
@@ -20,8 +20,8 @@ const DEFAULT_LANDINGS: Landing[] = [
 ]
 
 async function seedIfEmpty(): Promise<void> {
-  const all = await Promise.resolve(db.select().from(landingsTable).limit(1).all() as Promise<unknown[]> | unknown[])
-  const arr = Array.isArray(all) ? all : await all
+  const { db, landings: landingsTable } = await getDbClient()
+  const arr = await execQuery<Landing>(db.select().from(landingsTable).limit(1))
   if (arr.length === 0) {
     for (const row of DEFAULT_LANDINGS) {
       const insertQuery = db.insert(landingsTable).values(row)
@@ -34,15 +34,15 @@ async function seedIfEmpty(): Promise<void> {
 
 export async function getLandings(): Promise<Landing[]> {
   await seedIfEmpty()
-  const rows = await Promise.resolve(db.select().from(landingsTable).all() as Promise<Landing[]> | Landing[])
-  return (Array.isArray(rows) ? rows : await rows) as Landing[]
+  const { db, landings: landingsTable } = await getDbClient()
+  return execQuery<Landing>(db.select().from(landingsTable))
 }
 
 export async function getLandingBySlug(slug: string): Promise<Landing | null> {
   await seedIfEmpty()
-  const rows = await Promise.resolve(
-    db.select().from(landingsTable).where(eq(landingsTable.slug, slug)).limit(1).all() as Promise<Landing[]> | Landing[]
+  const { db, landings: landingsTable } = await getDbClient()
+  const arr = await execQuery<Landing>(
+    db.select().from(landingsTable).where(eq(landingsTable.slug, slug)).limit(1)
   )
-  const arr = Array.isArray(rows) ? rows : await rows
   return (arr[0] as Landing) ?? null
 }

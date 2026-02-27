@@ -1,27 +1,17 @@
 import { mkdirSync, existsSync } from "fs"
 import { join } from "path"
 
-type Client = {
+type DbClient = {
   db: Record<string, unknown>
   landings: Record<string, unknown>
   submissions: Record<string, unknown>
   analytics_events: Record<string, unknown>
 }
 
-let client: Client | null = null
+let cachedClient: DbClient | null = null
+let initPromise: Promise<DbClient> | null = null
 
-function getClient(): Client {
-  if (client) return client
-  const hasPostgres = Boolean(process.env.DATABASE_URL)
-  if (hasPostgres) {
-    client = createPostgresClient()
-  } else {
-    client = createSqliteClient()
-  }
-  return client
-}
-
-function createSqliteClient(): Client {
+async function createSqliteClient(): Promise<DbClient> {
   const { drizzle } = require("drizzle-orm/better-sqlite3")
   const Database = require("better-sqlite3")
   const schema = require("./schema")
@@ -55,23 +45,31 @@ function createSqliteClient(): Client {
       created_at TEXT NOT NULL
     );
   `)
-  return { db: drizzle(sqlite, { schema }), landings: schema.landings, submissions: schema.submissions, analytics_events: schema.analytics_events }
+  return {
+    db: drizzle(sqlite, { schema }),
+    landings: schema.landings,
+    submissions: schema.submissions,
+    analytics_events: schema.analytics_events,
+  }
 }
 
-function createPostgresClient(): Client {
+async function createPostgresClient(): Promise<DbClient> {
   const { drizzle } = require("drizzle-orm/node-postgres")
   const { Pool } = require("pg")
   const schemaPg = require("./schema-pg")
   const pool = new Pool({ connectionString: process.env.DATABASE_URL })
-  pool.query(`
+
+  // Await table creation before returning — prevents "relation does not exist" on fresh DBs
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS landings (
       id TEXT PRIMARY KEY,
       slug TEXT NOT NULL UNIQUE,
       name TEXT NOT NULL,
       path TEXT NOT NULL,
       created_at TEXT NOT NULL
-    );
-  `).then(() => pool.query(`
+    )
+  `)
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS submissions (
       id TEXT PRIMARY KEY,
       landing_id TEXT NOT NULL REFERENCES landings(id),
@@ -80,8 +78,9 @@ function createPostgresClient(): Client {
       phone TEXT NOT NULL DEFAULT '',
       meta TEXT NOT NULL DEFAULT '{}',
       created_at TEXT NOT NULL
-    );
-  `)).then(() => pool.query(`
+    )
+  `)
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS analytics_events (
       id TEXT PRIMARY KEY,
       type TEXT NOT NULL,
@@ -89,8 +88,10 @@ function createPostgresClient(): Client {
       page_id TEXT,
       error_message TEXT,
       created_at TEXT NOT NULL
-    );
-  `)).catch((err: Error) => console.error("[db] Postgres ensure tables failed:", err))
+    )
+  `)
+
+  console.log("[db] Postgres tables ready.")
   return {
     db: drizzle(pool, { schema: schemaPg }),
     landings: schemaPg.landings,
@@ -99,17 +100,32 @@ function createPostgresClient(): Client {
   }
 }
 
-// Lazy proxies: avoid loading better-sqlite3 at build time (e.g. on Vercel).
-// Client is created on first use; set DATABASE_URL on Vercel to use Postgres.
-function lazy<T extends Record<string, unknown>>(key: keyof Client): T {
-  return new Proxy({} as T, {
-    get(_, prop) {
-      return (getClient()[key] as T)[prop as keyof T]
-    },
-  })
+/**
+ * Returns the initialised DB client, creating and caching it on first call.
+ * Tables are created (CREATE TABLE IF NOT EXISTS) before the client resolves.
+ * Safe for both SQLite (local/dev) and Postgres (Render/production).
+ */
+export async function getDbClient(): Promise<DbClient> {
+  if (cachedClient) return cachedClient
+  if (!initPromise) {
+    initPromise = (process.env.DATABASE_URL ? createPostgresClient() : createSqliteClient()).then(
+      (c) => {
+        cachedClient = c
+        return c
+      }
+    )
+  }
+  return initPromise
 }
 
-export const db = lazy<Client["db"]>("db")
-export const landings = lazy<Client["landings"]>("landings")
-export const submissions = lazy<Client["submissions"]>("submissions")
-export const analytics_events = lazy<Client["analytics_events"]>("analytics_events")
+/**
+ * Executes a Drizzle query for both adapters:
+ * - SQLite (better-sqlite3): queries have a synchronous `.all()` method
+ * - Postgres (node-postgres): queries are Promises
+ */
+export async function execQuery<T>(query: unknown): Promise<T[]> {
+  if (query && typeof (query as { all?: unknown }).all === "function") {
+    return (query as { all: () => T[] }).all()
+  }
+  return await (query as Promise<T[]>)
+}

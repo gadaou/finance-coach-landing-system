@@ -1,5 +1,5 @@
 import { eq, and, gte, lte } from "drizzle-orm"
-import { db, analytics_events as eventsTable } from "./db/client"
+import { getDbClient, execQuery } from "./db/client"
 import { getLandings, getLandingBySlug } from "./landings"
 import type { AnalyticsEventType } from "./db/schema"
 
@@ -40,6 +40,9 @@ export type ChartBucket = {
   thankYouViews: number
 }
 
+type EventRow = { id: string; type: string; landing_id: string | null; created_at: string }
+type ChartRow = { type: string; created_at: string }
+
 export async function addAnalyticsEvent(params: {
   type: string
   pageId?: string
@@ -47,6 +50,7 @@ export async function addAnalyticsEvent(params: {
   error?: string
 }): Promise<void> {
   if (!EVENT_TYPES.includes(params.type as AnalyticsEventType)) return
+  const { db, analytics_events: eventsTable } = await getDbClient()
   let landing_id: string | null = null
   if (params.landing) {
     const landing = await getLandingBySlug(params.landing)
@@ -86,14 +90,12 @@ function mapTypeToKey(type: string): keyof TotalsSummary | null {
 }
 
 export async function getAnalyticsSummary(landingSlug?: string): Promise<SummaryResponse> {
+  const { db, analytics_events: eventsTable } = await getDbClient()
   const landings = await getLandings()
   const landingIds = new Set(landings.map((l) => l.id))
   const landingById = new Map(landings.map((l) => [l.id, l]))
 
-  const rows = await Promise.resolve(
-    db.select().from(eventsTable).all() as Promise<{ id: string; type: string; landing_id: string | null; created_at: string }[]> | { id: string; type: string; landing_id: string | null; created_at: string }[]
-  )
-  const arr = Array.isArray(rows) ? rows : await rows
+  const arr = await execQuery<EventRow>(db.select().from(eventsTable))
 
   const countsByLanding = new Map<string, TotalsSummary>()
   for (const l of landings) {
@@ -143,6 +145,7 @@ export async function getAnalyticsChart(params: {
   to?: string
   granularity?: "day"
 }): Promise<{ buckets: ChartBucket[] }> {
+  const { db, analytics_events: eventsTable } = await getDbClient()
   const { landingSlug, from, to, granularity = "day" } = params
   const landings = await getLandings()
   const landingBySlug = new Map(landings.map((l) => [l.slug, l]))
@@ -160,14 +163,12 @@ export async function getAnalyticsChart(params: {
   conditions.push(gte(eventsTable.created_at, fromDate + "T00:00:00.000Z"))
   conditions.push(lte(eventsTable.created_at, toDate + "T23:59:59.999Z"))
 
-  const allRows = await Promise.resolve(
+  const allArr = await execQuery<ChartRow>(
     db
       .select({ type: eventsTable.type, created_at: eventsTable.created_at })
       .from(eventsTable)
       .where(and(...conditions))
-      .all() as Promise<{ type: string; created_at: string }[]> | { type: string; created_at: string }[]
   )
-  const allArr = Array.isArray(allRows) ? allRows : await allRows
 
   const bucketMap = new Map<string, ChartBucket>()
   const addToBucket = (dateStr: string, type: string) => {
