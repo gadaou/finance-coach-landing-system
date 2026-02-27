@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
 
-const CORS_ORIGIN = process.env.CORS_ORIGIN
+function normalizeOrigin(value: string | undefined): string {
+  if (!value) return ""
+  return value.replace(/\/+$/, "")
+}
+
+const CORS_ORIGIN = normalizeOrigin(process.env.CORS_ORIGIN)
 
 function corsHeaders(origin: string | null): HeadersInit {
-  const allowOrigin = CORS_ORIGIN ?? origin ?? "*"
+  const raw = CORS_ORIGIN || origin || "*"
+  const allowOrigin = raw === "*" ? "*" : normalizeOrigin(raw)
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
