@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { ScrollReveal } from "./scroll-reveal"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -15,7 +16,7 @@ import { trackThankYouView } from "@/lib/analytics"
 const LANDING_SLUG = "acca"
 
 export function EnrollFormSection() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const router = useRouter()
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
@@ -32,9 +33,8 @@ export function EnrollFormSection() {
       const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone, learningMode })
       if (result.ok) {
         trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
-        setIsSubmitted(true)
         setFormData({ name: "", email: "", phone: "", learningMode: "online" })
-        setTimeout(() => setIsSubmitted(false), 5000)
+        router.push(`/${LANDING_SLUG}/thank-you`)
       } else {
         setError(result.error ?? "Submission failed. Please try again.")
       }
@@ -88,18 +88,7 @@ export function EnrollFormSection() {
 
             <ScrollReveal animation="slide-in-right">
               <div className="p-8 md:p-10 rounded-2xl bg-card border border-border shadow-2xl">
-                {isSubmitted ? (
-                  <div className="text-center py-12">
-                    <div className="inline-flex p-4 rounded-full bg-primary/10 text-primary mb-6">
-                      <CheckCircle2 className="h-12 w-12" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
-                    <p className="text-muted-foreground">
-                      Thank you. We will contact you soon.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
@@ -173,7 +162,6 @@ export function EnrollFormSection() {
                       Book Your Free Consultation
                     </Button>
                   </form>
-                )}
               </div>
             </ScrollReveal>
           </div>

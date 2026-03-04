@@ -6,6 +6,7 @@ import { Input } from "@landing/components/ui/input"
 import { Label } from "@landing/components/ui/label"
 import { CheckCircle2, ArrowLeft, Shield } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { submitToApi } from "@/lib/submit-form"
 import { trackThankYouView } from "@/lib/analytics"
 
@@ -18,7 +19,7 @@ const ENROLL_BENEFITS = [
 ]
 
 export function Fmva6EnrollSection() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const router = useRouter()
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
@@ -41,9 +42,8 @@ export function Fmva6EnrollSection() {
       const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone })
       if (result.ok) {
         trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
-        setIsSubmitted(true)
         setFormData({ name: "", email: "", phone: "" })
-        setTimeout(() => setIsSubmitted(false), 5000)
+        router.push(`/${LANDING_SLUG}/thank-you`)
       } else {
         setError(result.error ?? "فشل الإرسال. يرجى المحاولة مرة أخرى.")
       }
@@ -130,18 +130,7 @@ export function Fmva6EnrollSection() {
               <div className="relative group min-w-0 w-full overflow-hidden">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none" />
                 <div className="relative p-4 md:p-6 rounded-xl md:rounded-2xl bg-card border-2 border-primary/20 shadow-xl w-full min-w-0 max-w-full box-border overflow-hidden" dir="rtl">
-                  {isSubmitted ? (
-                    <div className="text-center py-8">
-                      <div className="inline-flex p-3 rounded-full bg-primary/10 text-primary mb-4">
-                        <CheckCircle2 className="h-10 w-10" />
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-3">شكراً لك!</h3>
-                      <p className="text-muted-foreground">
-                        شكراً لك. سنتواصل معك قريباً.
-                      </p>
-                    </div>
-                  ) : (
-                    <form
+                  <form
                       action="https://formsubmit.co/info@financecoach.co"
                       method="POST"
                       onSubmit={handleSubmit}
@@ -211,7 +200,6 @@ export function Fmva6EnrollSection() {
                         بالضغط على الزر، أنت توافق على شروط الاستخدام وسياسة الخصوصية
                       </p>
                     </form>
-                  )}
                 </div>
               </div>
             </ScrollReveal>

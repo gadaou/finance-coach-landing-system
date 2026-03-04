@@ -6,13 +6,14 @@ import { Input } from "@fmva1/components/ui/input"
 import { Label } from "@fmva1/components/ui/label"
 import { CheckCircle2, ArrowRight, Shield } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { submitToApi } from "@/lib/submit-form"
 import { trackThankYouView } from "@/lib/analytics"
 
 const LANDING_SLUG = "fmva1"
 
 export function EnrollSection() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const router = useRouter()
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     name: "",
@@ -28,9 +29,8 @@ export function EnrollSection() {
       const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone })
       if (result.ok) {
         trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
-        setIsSubmitted(true)
         setFormData({ name: "", email: "", phone: "" })
-        setTimeout(() => setIsSubmitted(false), 5000)
+        router.push(`/${LANDING_SLUG}/thank-you`)
       } else {
         setError(result.error ?? "فشل الإرسال. يرجى المحاولة مرة أخرى.")
       }
@@ -113,18 +113,7 @@ export function EnrollSection() {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative p-8 md:p-10 rounded-2xl bg-card border-2 border-primary/20 shadow-2xl" dir="rtl">
-                  {isSubmitted ? (
-                    <div className="text-center py-12">
-                      <div className="inline-flex p-4 rounded-full bg-primary/10 text-primary mb-6">
-                        <CheckCircle2 className="h-12 w-12" />
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-4">شكراً لك!</h3>
-                      <p className="text-muted-foreground">
-                        شكراً لك. سنتواصل معك قريباً.
-                      </p>
-                    </div>
-                  ) : (
-                    <form 
+                  <form 
                       action="https://formsubmit.co/info@financecoach.co" 
                       method="POST"
                       onSubmit={handleSubmit} 
@@ -194,7 +183,6 @@ export function EnrollSection() {
                         بالضغط على "سجل الآن"، أنت توافق على شروط الاستخدام وسياسة الخصوصية
                       </p>
                     </form>
-                  )}
                 </div>
               </div>
             </ScrollReveal>
