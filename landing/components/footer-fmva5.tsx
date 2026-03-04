@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, Facebook, Instagram, Linkedin } from "lucide-react"
+import { Mail } from "lucide-react"
 
 export function FooterFmva5() {
   return (
@@ -20,33 +20,12 @@ export function FooterFmva5() {
               info@financecoach.co
             </a>
           </div>
-          <div className="flex items-center gap-2">
-            <a
-              href="https://www.facebook.com/share/1H2Kg4o6ZM/?mibextid=wwXIfr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary-foreground/60 hover:text-primary transition-colors p-1.5 -m-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
-              aria-label="Facebook"
-            >
-              <Facebook className="h-4 w-4" />
+          <div className="flex items-center gap-3 flex-wrap">
+            <a href="/terms" className="text-secondary-foreground/60 hover:text-primary transition-colors text-xs">
+              الشروط والأحكام
             </a>
-            <a
-              href="https://www.instagram.com/the.finance.coach?igsh=MWZ6bHBhYmF2bWNpbA=="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary-foreground/60 hover:text-primary transition-colors p-1.5 -m-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a
-              href="https://www.linkedin.com/school/financecoach/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary-foreground/60 hover:text-primary transition-colors p-1.5 -m-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-4 w-4" />
+            <a href="/terms#refund-policy" className="text-secondary-foreground/60 hover:text-primary transition-colors text-xs">
+              سياسة الاسترداد
             </a>
           </div>
         </div>

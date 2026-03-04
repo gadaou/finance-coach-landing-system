@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image"
-import { Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react"
+import { Mail } from "lucide-react"
 
 export function Footer() {
   return (
@@ -76,34 +75,12 @@ export function Footer() {
 
           {/* Bottom content */}
           <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-6 pt-12 md:pt-24 pb-0">
-            {/* Social Media Icons */}
-            <div className="flex gap-3 md:gap-4 flex-shrink-0">
-              <a
-                href="https://www.facebook.com/share/1H2Kg4o6ZM/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground/60 hover:text-primary transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
+            <div className="flex gap-3 md:gap-4 flex-shrink-0 flex-wrap justify-center md:justify-start">
+              <a href="/terms" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+                الشروط والأحكام
               </a>
-              <a
-                href="https://www.instagram.com/the.finance.coach?igsh=MWZ6bHBhYmF2bWNpbA=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground/60 hover:text-primary transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/school/financecoach/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary-foreground/60 hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
+              <a href="/terms#refund-policy" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+                سياسة الاسترداد
               </a>
             </div>
 
