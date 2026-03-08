@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import Script from "next/script"
+
 import { Analytics } from "@vercel/analytics/next"
 import { AnalyticsConnector } from "@/components/analytics-connector"
 import { AnalyticsPageView } from "@/components/analytics-page-view"
@@ -56,8 +56,8 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
-        <Script id="gtm" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
-        <Script id="clarity" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: CLARITY_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: CLARITY_SCRIPT }} />
       </head>
       <body className={`${notoSansArabic.variable} font-sans antialiased`}>
         <noscript>
