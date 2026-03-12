@@ -10,30 +10,46 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { CheckCircle2 } from "lucide-react"
+import { CountryCodeSelect } from "@/components/country-code-select"
 import { submitToApi } from "@/lib/submit-form"
 import { trackThankYouView } from "@/lib/analytics"
+import { validatePhone } from "@/lib/phone-validation"
 
 const LANDING_SLUG = "acca"
 
 export function EnrollFormSection() {
   const router = useRouter()
   const [error, setError] = useState("")
+  const [phoneError, setPhoneError] = useState("")
+  const [phoneTouched, setPhoneTouched] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    countryCode: "+20",
     learningMode: "online",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
-    const { name, email, phone, learningMode } = formData
+    const { name, email, phone, countryCode, learningMode } = formData
+
+    // Validate phone before submission
+    const phoneValidation = validatePhone(countryCode, phone)
+    if (!phoneValidation.valid) {
+      setPhoneError(phoneValidation.error || "Invalid phone number")
+      setPhoneTouched(true)
+      return
+    }
+
     try {
-      const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone, learningMode })
+      const result = await submitToApi({ landing: LANDING_SLUG, name, email, phone: `${countryCode} ${phone}`, learningMode })
       if (result.ok) {
         trackThankYouView({ pageId: LANDING_SLUG, landing: LANDING_SLUG })
-        setFormData({ name: "", email: "", phone: "", learningMode: "online" })
+        setFormData({ name: "", email: "", phone: "", countryCode: "+20", learningMode: "online" })
+        setPhoneTouched(false)
+        setPhoneError("")
         router.push(`/${LANDING_SLUG}/thank-you`)
       } else {
         setError(result.error ?? "Submission failed. Please try again.")
@@ -44,7 +60,23 @@ export function EnrollFormSection() {
   }
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData((prev) => {
+      const newData = { ...prev, [field]: value }
+      // Validate phone when phone or countryCode changes
+      if ((field === "phone" || field === "countryCode") && phoneTouched) {
+        const phoneVal = field === "phone" ? value : prev.phone
+        const codeVal = field === "countryCode" ? value : prev.countryCode
+        const validation = validatePhone(codeVal, phoneVal)
+        setPhoneError(validation.valid ? "" : (validation.error || ""))
+      }
+      return newData
+    })
+  }
+
+  const handlePhoneBlur = () => {
+    setPhoneTouched(true)
+    const validation = validatePhone(formData.countryCode, formData.phone)
+    setPhoneError(validation.valid ? "" : (validation.error || ""))
   }
 
   return (
@@ -118,16 +150,26 @@ export function EnrollFormSection() {
 
                     <div className="space-y-2">
                       <Label htmlFor="phone">Mobile Number *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder="+20 XXX XXX XXXX"
-                        className="h-12 focus:ring-2 focus:ring-primary focus:border-primary cursor-text"
-                        autoComplete="tel"
-                      />
+                      <div className="flex gap-2">
+                        <CountryCodeSelect
+                          value={formData.countryCode}
+                          onChange={(code) => handleChange("countryCode", code)}
+                        />
+                        <Input
+                          id="phone"
+                          type="tel"
+                          required
+                          value={formData.phone}
+                          onChange={(e) => handleChange("phone", e.target.value)}
+                          onBlur={handlePhoneBlur}
+                          placeholder="XXX XXX XXXX"
+                          className={`h-12 flex-1 focus:ring-2 focus:ring-primary focus:border-primary cursor-text ${phoneTouched && phoneError ? "border-destructive" : ""}`}
+                          autoComplete="tel"
+                        />
+                      </div>
+                      {phoneTouched && phoneError && (
+                        <p className="text-sm text-destructive">{phoneError}</p>
+                      )}
                     </div>
 
                     {error && (

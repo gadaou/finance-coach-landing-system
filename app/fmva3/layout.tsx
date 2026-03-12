@@ -1,9 +1,15 @@
 import "./globals.css"
+import { ClarityScript } from "@/components/clarity-script"
 
 export default function Fmva3Layout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <ClarityScript />
+      {children}
+    </>
+  )
 }
